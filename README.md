@@ -19,7 +19,7 @@ Run
 =====
 
 npm start
-
+or on a custom post PORT=3000 npm start
 
 Build
 =====
