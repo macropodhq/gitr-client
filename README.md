@@ -26,3 +26,8 @@ Build
 
 npm build
 
+
+Further reading
+=====
+
+https://github.com/petehunt/webpack-howto
