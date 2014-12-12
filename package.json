@@ -1,7 +1,7 @@
 {
-  "name": "bugherd-client",
+  "name": "webpack-skel",
   "version": "1.0.0",
-  "description": "BugHerd Client",
+  "description": "a simple webpack template",
   "dependencies": {
     "bows": "^1.3.2",
     "lodash-node": "^2.4.1",
