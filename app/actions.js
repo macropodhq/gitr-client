@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var agent = require('superagent');
+var defaults = require('superagent-defaults');
 var uuid = require('uuid');
 var Houkou = require('houkou');
 
@@ -9,7 +10,7 @@ var log = require('bows')('Actions');
 
 var constants = require('./action-constants');
 
-var makeFetchMultiple = function(authorisedAgent, pendingEvent, completeEvent, key, urlTemplate) {
+var makeFetchMultiple = function(ctx, pendingEvent, completeEvent, key, urlTemplate) {
   log('Generating fetchMultiple function', pendingEvent, completeEvent);
 
   return function() {
@@ -20,7 +21,7 @@ var makeFetchMultiple = function(authorisedAgent, pendingEvent, completeEvent, k
     });
 
     var self = this;
-    authorisedAgent.get(urlTemplate.build({})).end(function(res) {
+    ctx.agent.get(urlTemplate.build({})).end(function(res) {
       if (!res.ok) {
         return self.dispatch(completeEvent, {
           operationId: operationId,
@@ -36,7 +37,7 @@ var makeFetchMultiple = function(authorisedAgent, pendingEvent, completeEvent, k
   };
 };
 
-var makeFetchOne = function(authorisedAgent, pendingEvent, completeEvent, urlTemplate) {
+var makeFetchOne = function(ctx, pendingEvent, completeEvent, urlTemplate) {
   log('Generating fetchOneOf function', pendingEvent, completeEvent);
 
   return function(id) {
@@ -48,7 +49,7 @@ var makeFetchOne = function(authorisedAgent, pendingEvent, completeEvent, urlTem
     });
 
     var self = this;
-    authorisedAgent.get(urlTemplate.build({id: id})).end(function(res) {
+    ctx.agent.get(urlTemplate.build({id: id})).end(function(res) {
       if (!res.ok) {
         return self.dispatch(completeEvent, {
           operationId: operationId,
@@ -64,7 +65,7 @@ var makeFetchOne = function(authorisedAgent, pendingEvent, completeEvent, urlTem
   };
 };
 
-var makeCreate = function(authorisedAgent, pendingEvent, completeEvent, urlTemplate, attributeValidation) {
+var makeCreate = function(ctx, pendingEvent, completeEvent, urlTemplate, attributeValidation) {
   log('Generating create function', pendingEvent, completeEvent);
 
   return function(attributes) {
@@ -79,7 +80,7 @@ var makeCreate = function(authorisedAgent, pendingEvent, completeEvent, urlTempl
     });
 
     var self = this;
-    authorisedAgent.post(urlTemplate.build({})).send(attributes).end(function(res) {
+    ctx.agent.post(urlTemplate.build({})).send(attributes).end(function(res) {
       if (!res.ok) {
         return self.dispatch(completeEvent, {
           operationId: operationId,
@@ -95,7 +96,7 @@ var makeCreate = function(authorisedAgent, pendingEvent, completeEvent, urlTempl
   };
 };
 
-var makeUpdate = function(authorisedAgent, pendingEvent, completeEvent, urlTemplate, attributeValidation) {
+var makeUpdate = function(ctx, pendingEvent, completeEvent, urlTemplate, attributeValidation) {
   log('Generating update function', pendingEvent, completeEvent);
 
   return function(attributes) {
@@ -111,7 +112,7 @@ var makeUpdate = function(authorisedAgent, pendingEvent, completeEvent, urlTempl
     });
 
     var self = this;
-    authorisedAgent.put(urlTemplate.build({id: id})).send(attributes).end(function(res) {
+    ctx.agent.put(urlTemplate.build({id: id})).send(attributes).end(function(res) {
       if (!res.ok) {
         return self.dispatch(completeEvent, {
           operationId: operationId,
@@ -127,7 +128,7 @@ var makeUpdate = function(authorisedAgent, pendingEvent, completeEvent, urlTempl
   };
 };
 
-var makeDelete = function(authorisedAgent, pendingEvent, completeEvent, urlTemplate) {
+var makeDelete = function(ctx, pendingEvent, completeEvent, urlTemplate) {
   log('Generating delete function', pendingEvent, completeEvent);
 
   return function(id) {
@@ -139,7 +140,7 @@ var makeDelete = function(authorisedAgent, pendingEvent, completeEvent, urlTempl
     });
 
     var self = this;
-    authorisedAgent.del(urlTemplate.build({id: id})).end(function(res) {
+    ctx.agent.del(urlTemplate.build({id: id})).end(function(res) {
       if (!res.ok) {
         return self.dispatch(completeEvent, {
           operationId: operationId,
@@ -154,15 +155,31 @@ var makeDelete = function(authorisedAgent, pendingEvent, completeEvent, urlTempl
   };
 };
 
-module.exports = function createActions(authorisedAgent, baseUrl) {
+module.exports = function createActions(baseUrl) {
+  var ctx = {
+    agent: agent,
+    jwt: null,
+
+    setJwt(jwt) {
+      if (!this.jwt) {
+        this.jwt = jwt;
+        this.agent = defaults().set('authorization', 'Bearer ' + jwt);
+      }
+    },
+  };
+
   return {
-    peopleFetch: makeFetchMultiple(authorisedAgent, constants.PERSON_LOAD_PENDING, constants.PERSON_LOAD_COMPLETE, 'people', new Houkou(baseUrl + '/people.json')),
-    personFetch: makeFetchOne(authorisedAgent, constants.PERSON_GET_PENDING, constants.PERSON_GET_COMPLETE, new Houkou(baseUrl + '/people/:id.json')),
-    matchesFetch: makeFetchMultiple(authorisedAgent, constants.MATCH_LOAD_PENDING, constants.MATCH_LOAD_COMPLETE, 'matches', new Houkou(baseUrl + '/matches.json')),
-    matchFetch: makeFetchOne(authorisedAgent, constants.MATCH_GET_PENDING, constants.MATCH_GET_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
-    matchCreate: makeCreate(authorisedAgent, constants.MATCH_CREATE_PENDING, constants.MATCH_CREATE_COMPLETE, new Houkou(baseUrl + '/matches.json')),
-    matchUpdate: makeUpdate(authorisedAgent, constants.MATCH_UPDATE_PENDING, constants.MATCH_UPDATE_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
-    matchDelete: makeDelete(authorisedAgent, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
+    peopleFetch: makeFetchMultiple(ctx, constants.PERSON_LOAD_PENDING, constants.PERSON_LOAD_COMPLETE, 'people', new Houkou(baseUrl + '/people.json')),
+    personFetch: makeFetchOne(ctx, constants.PERSON_GET_PENDING, constants.PERSON_GET_COMPLETE, new Houkou(baseUrl + '/people/:id.json')),
+    matchesFetch: makeFetchMultiple(ctx, constants.MATCH_LOAD_PENDING, constants.MATCH_LOAD_COMPLETE, 'matches', new Houkou(baseUrl + '/matches.json')),
+    matchFetch: makeFetchOne(ctx, constants.MATCH_GET_PENDING, constants.MATCH_GET_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
+    matchCreate: makeCreate(ctx, constants.MATCH_CREATE_PENDING, constants.MATCH_CREATE_COMPLETE, new Houkou(baseUrl + '/matches.json')),
+    matchUpdate: makeUpdate(ctx, constants.MATCH_UPDATE_PENDING, constants.MATCH_UPDATE_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
+    matchDelete: makeDelete(ctx, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
+
+    setJwt(jwt) {
+      ctx.setJwt(jwt);
+    },
 
     login: function(githubClientToken) {
       var operationId = uuid.v1();
@@ -184,13 +201,15 @@ module.exports = function createActions(authorisedAgent, baseUrl) {
 
         window.removeEventListener('message', onMessage);
 
-        agent.post(baseUrl + '/authorize.json').send({code: ev.data.code}).end(function(res) {
+        ctx.agent.post(baseUrl + '/authorize.json').send({code: ev.data.code}).end(function(res) {
           if (!res.ok) {
             return self.dispatch(constants.LOGIN_COMPLETE, {
               operationId: operationId,
               error: res.text,
             });
           }
+
+          ctx.setJwt(res.body.token);
 
           return self.dispatch(constants.LOGIN_COMPLETE, {
             operationId: operationId,

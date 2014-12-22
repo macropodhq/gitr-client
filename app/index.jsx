@@ -3,7 +3,6 @@
 var React = require('react');
 var Router = require('react-router');
 var Fluxxor = require('fluxxor');
-var defaults = require('superagent-defaults');
 
 var routes = require('./routes');
 var createStores = require('./stores');
@@ -15,9 +14,7 @@ var logEvent = require('bows')('Events');
 var baseUrl = 'http://api.gitr.io/v1';
 var githubClientToken = '6fb60d94f985f1522e10';
 
-var authorisedAgent = defaults();
-
-var flux = new Fluxxor.Flux(createStores(), createActions(authorisedAgent, baseUrl));
+var flux = new Fluxxor.Flux(createStores(), createActions(baseUrl));
 
 flux.on('dispatch', function(name, payload) {
   logEvent(name, payload.operationId, _.omit(payload, 'operationId'));
