@@ -1,0 +1,37 @@
+$button-font-family: 'Open Sans', 'Helvetica Neue', 'Arial', 'Helvetica', 'sans-serif' !default;
+$button-font-weight: 400 !default;
+$button-font-size: .8em !default;
+
+.Button {
+  display: inline-block;
+  border: 0;
+  border-radius: 3px;
+  margin-bottom: 0;
+  padding: 0 1.5em;
+  height: 3em;
+  line-height: 3em;
+  font-size: $button-font-size;
+  font-family: $button-font-family;
+  font-weight: $button-font-weight;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(#000, .15);
+  color: white;
+  background-color: grey;
+  background-image: linear-gradient(to bottom, rgba(#000, 0) 50%, rgba(#000, .1) 100%);
+  white-space: nowrap;
+  user-select: none;
+
+  &[disabled] {
+    color: transparentize(white, 0.2);
+    background-image: linear-gradient(to bottom, rgba(#ccc, .6) 0%, rgba(#ccc, .6) 100%);
+
+    &:hover {
+      opacity: 1;
+      cursor: not-allowed;
+    }
+  }
+
+  &:hover {
+    opacity: .9;
+  }
+}

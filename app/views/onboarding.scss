@@ -1,7 +1,7 @@
 @import "colors";
 @import "variables";
 
-$color-onboarding-background: $color-smoky;
+$color-onboarding-background: $color-retail-monkey;
 $color-onboarding: $color-white;
 
 body {
@@ -10,7 +10,20 @@ body {
 
 .Onboarding {
   background: $color-onboarding-background;
-  color: $color-onboarding;
   text-align: center;
+  color: $color-onboarding;
   padding: $app-base-padding;
+  height: 100%;
+  position: relative;
+
+  h3 {
+    font-size: 20px;
+    position: absolute;
+    bottom: $app-base-padding;
+    left: $app-base-padding;
+    right: $app-base-padding;
+    margin: 0;
+    width: inherit;
+    font-weight: inherit;
+  }
 }
