@@ -26,6 +26,10 @@ h1 {
   font-weight: 100;
 }
 
+a, a:visited {
+  color: $color-sharp-suit;
+}
+
 .App {
   background: lighten($color-hastamayana, 15);
 }
