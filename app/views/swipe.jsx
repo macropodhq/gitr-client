@@ -29,7 +29,12 @@ var Swipe = module.exports = React.createClass({
           <div className="Swipe-cards">
             <div className="Swipe-card">
               <img src="https://avatars1.githubusercontent.com/u/479055" />
-              <h4>Conrad Pankoff</h4>
+              <div className="Swipe-card-details">
+                <h4>Conrad Pankoff</h4>
+                <div className="Swipe-card-details-icons">
+                  icons?
+                </div>
+              </div>
             </div>
           </div>
         </div>

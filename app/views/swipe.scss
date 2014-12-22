@@ -1,19 +1,63 @@
 @import "colors";
+@import "variables";
+@import "placeholders";
 
 .Swipe {
   .Swipe-cards {
     max-width: 300px;
     margin: 0 auto;
 
-    .Swipe-card {
-      padding: 5px;
+    .Swipe-card, .Swipe-card:before, .Swipe-card:after {
       background: $color-white;
       border: 2px solid $color-hastamayana;
       border-radius: 2px;
+    }
+
+    .Swipe-card {
+      padding: 5px;
+      position: relative;
+
+      h4 {
+        margin: 0 auto;
+        font-weight: normal;
+        float: left;
+      }
+
+      .Swipe-card-details {
+        padding: ($app-base-padding/2) 0px;
+        @extend %clearfix;
+
+        .Swipe-card-details-icons {
+          float: right;
+        }
+      }
 
       img {
         max-width: 100%;
         border-radius: 2px;
+      }
+
+      &:after, &:before {
+        content: '';
+        background: $color-white;
+        border-top: none;
+        position: absolute;
+        height: 10px;
+      }
+
+      &:after {
+        width: 98%;
+        left: 1%;
+        bottom: -12px;
+        background-color: darken($color-white, 5);
+      }
+
+      &:before {
+        width: 96%;
+        left: 2%;
+        height: 8px;
+        bottom: -20px;
+        background-color: darken($color-white, 10);
       }
     }
   }
