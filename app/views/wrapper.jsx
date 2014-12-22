@@ -34,7 +34,7 @@ var Wrapper = module.exports = React.createClass({
             <div className="App-nav-item">
               {this.getLeftButton()}
             </div>
-            <h1>Gitr</h1>
+            <h1>{this.props.heading || 'Gitr'}</h1>
             <div className="App-nav-item App-nav-item--message">
               <Router.Link to="messages">
                 <Icon type="bubble" className="App-nav-item" font={false}/>
