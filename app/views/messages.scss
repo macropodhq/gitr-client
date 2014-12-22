@@ -1,1 +1,38 @@
-// turn down for
+@import "colors";
+@import "placeholders";
+@import "variables";
+
+$color-user-border: $color-hastamayana;
+
+.Messages {
+  .Messages-users {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    h2 {
+      font-weight: 300;
+      margin: 0.6em 0;
+      font-size: 17px;
+    }
+
+    li {
+      @extend %clearfix;
+      border-bottom: 1px solid $color-user-border;
+
+      a {
+        padding: ($app-base-padding / 2) 0;
+        text-decoration: none;
+        display: block;
+      }
+
+      img {
+        float: left;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        margin-right: $app-base-padding;
+      }
+    }
+  }
+}
