@@ -10,9 +10,10 @@ var log = require('bows')('Routes');
 
 var AppView = require('./views/app');
 var SwipeView = require('./views/swipe');
+var OnboardingView = require('./views/onboarding');
 
 module.exports = (
   <Route name="app" path="/" handler={AppView}>
-    <DefaultRoute handler={SwipeView} />
+    <DefaultRoute handler={OnboardingView} />
   </Route>
 );
