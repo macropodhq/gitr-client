@@ -35,6 +35,7 @@ a, a:visited {
 }
 
 .App-content {
+  clear: both;
   height: calc(100% - #{$app-header-height});
   overflow-y: auto;
   background-color: #646c7c;
@@ -44,25 +45,32 @@ a, a:visited {
 header {
   background: $color-white;
   color: #a4a2b2;
-  padding: $app-base-padding / 2;
+  padding: 0 $app-base-padding / 2;
   height: $app-header-height;
 
   .App-nav {
     @extend %clearfix;
 
     a, a:visted {
-      color: $color-white;
+      color: #a4a2b2;
     }
 
-    svg path {
-      fill: $color-white;
+    .Icon {
+      height: $app-header-height;
+      padding: 16px 0;
     }
 
-    .Icon svg {
-      height: 1.3em;
+    svg {
+      height: 17px
+    }
+
+    path {
+      fill: #a4a2b2;
     }
 
     h1 {
+      height: $app-header-height;
+      padding: 12px 0;
       width: 60%;
       font-weight: 600;
       font-size: 18px;
