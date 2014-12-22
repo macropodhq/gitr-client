@@ -4,6 +4,7 @@
 
 html, body, .App {
   height: 100%;
+  overflow-x: hidden;
 }
 body {
   font-family: 'Roboto', sans-serif;
@@ -27,7 +28,6 @@ h1 {
 
 .App {
   background: lighten($color-hastamayana, 15);
-  overflow-x: hidden;
 }
 
 .App-content {
