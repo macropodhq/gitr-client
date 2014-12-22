@@ -1,5 +1,6 @@
 @import "colors";
 @import "variables";
+@import "placeholders";
 
 html, body, .App {
   height: 100%;
@@ -36,4 +37,38 @@ header {
   background: $color-blue-light-special;
   color: $color-white;
   padding: $app-base-padding / 2;
+
+  .App-nav {
+    @extend %clearfix;
+
+    a, a:visted {
+      color: $color-white;
+    }
+
+    svg path {
+      fill: $color-white;
+    }
+
+    .Icon svg {
+      height: 1.3em;
+    }
+
+    h1 {
+      width: 60%;
+      float: left;
+      margin: 0;
+      text-align: center;
+    }
+
+    .App-nav-item {
+      width: 20%;
+      float: left;
+    }
+
+    .App-nav-item--message {
+      a {
+        float: right;
+      }
+    }
+  }
 }

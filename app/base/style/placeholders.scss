@@ -1,0 +1,35 @@
+%absolute-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+%transition-all {
+  transition: all 200ms cubic-bezier(0.890, 0.200, 0.170, 0.860);
+  transition-timing-function: cubic-bezier(0.890, 0.200, 0.170, 0.860);
+}
+
+%clearfix {
+  &:before, &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+%unstyled-list {
+  margin:   0;
+  padding:  0;
+  list-style: none;
+}
+
+%disable-select {
+  webkit-touch-callout: none;
+  user-select: none;
+  cursor: default;
+}
