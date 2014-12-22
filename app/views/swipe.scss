@@ -18,7 +18,7 @@ $color-no: $color-alizarin;
 
     .Swipe-card, .Swipe-card-next, .Swipe-card-next:before {
       background: $color-white;
-      border: 2px solid $color-hastamayana;
+      box-shadow: 0 1px 3px rgba(#000, .2);
       border-radius: 2px;
     }
 
@@ -45,7 +45,7 @@ $color-no: $color-alizarin;
       .Swipe-card-image {
         max-width: 100%;
         background-size: cover;
-        border-radius: 2px;
+        border-radius: 1px;
         height: calc(100% - 46px);
       }
     }
@@ -84,7 +84,7 @@ $color-no: $color-alizarin;
       position: absolute;
       top: 10px;
       left: 1%;
-      background-color: darken($color-white, 5);
+      background-color: transparentize($color-white, .3);
 
       &:before {
         content: '';
@@ -93,9 +93,10 @@ $color-no: $color-alizarin;
         position: absolute;
         width: 96%;
         left: 2%;
-        height: 8px;
+        height: 10px;
         bottom: -10px;
-        background-color: darken($color-white, 10);
+        border-radius: 0 0 2px 2px;
+        background-color: transparentize($color-white, .5);
       }
     }
   }
