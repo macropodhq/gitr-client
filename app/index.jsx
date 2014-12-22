@@ -10,17 +10,21 @@ var createStores = require('./stores');
 var createActions = require('./actions');
 
 var log = require('bows')('App');
+var logEvent = require('bows')('Events');
 
-var startApp = function startApp(baseUrl, token) {
-  var authorisedAgent = defaults().set('authorization', 'Bearer ' + token);
+var baseUrl = 'http://api.gitr.io/v1';
+var githubClientToken = '6fb60d94f985f1522e10';
 
-  var flux = new Fluxxor.Flux(createStores(), createActions(authorisedAgent, baseUrl));
+var authorisedAgent = defaults();
 
-  Router.run(routes, (Handler, state) => {
-    log('route change', state);
+var flux = new Fluxxor.Flux(createStores(), createActions(authorisedAgent, baseUrl));
 
-    React.render(<Handler flux={flux} />, document.body);
-  });
-};
+flux.on('dispatch', function(name, payload) {
+  logEvent(name, payload.operationId, _.omit(payload, 'operationId'));
+});
 
-startApp('https://api.gitr.io/api/v1', 'not a real token');
+Router.run(routes, (Handler, state) => {
+  log('route change', state);
+
+  React.render(<Handler flux={flux} githubClientToken={githubClientToken} />, document.body);
+});
