@@ -12,11 +12,13 @@ var AppView = require('./views/app');
 var SwipeView = require('./views/swipe');
 var OnboardingView = require('./views/onboarding');
 var MessagesView = require('./views/messages');
+var DetailView = require('./views/detail');
 
 module.exports = (
   <Route name="app" path="/" handler={AppView}>
     <DefaultRoute handler={OnboardingView} />
     <Route name="swipe" path="/explore" handler={SwipeView}/>
     <Route name="messages" path="/messages" handler={MessagesView}/>
+    <Route name="detail" path="/detail" handler={DetailView}/>
   </Route>
 );

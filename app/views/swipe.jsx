@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
+var Router = require('react-router');
 var Fluxxor = require('fluxxor');
 var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
@@ -211,7 +212,7 @@ var Swipe = module.exports = React.createClass({
 
           <div className="Swipe-controls">
             <div className="Swipe-control Swipe-control--no" onClick={this.handleNo}>×</div>
-            <div className="Swipe-control Swipe-control--info">i</div>
+            <Router.Link className="Swipe-control Swipe-control--info" to="detail">i</Router.Link>
             <div className="Swipe-control Swipe-control--yes" onClick={this.handleYes}>✓</div>
           </div>
         </div>
