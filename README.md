@@ -13,7 +13,7 @@ Run for Development
 
 > $ npm start
 
-or on a custom port:
+The default port is `8080` - to use a different one, do something like this:
 
 > $ PORT=3000 npm start
 
