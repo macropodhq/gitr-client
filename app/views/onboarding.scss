@@ -3,6 +3,7 @@
 
 $color-onboarding-background: $color-sharp-suit;
 $color-onboarding: $color-white;
+$color-phone: $color-mine-shaft;
 
 body {
 //asdf
@@ -17,7 +18,7 @@ body {
   position: relative;
 
   h3 {
-    font-size: 20px;
+    font-size: 14px;
     position: absolute;
     bottom: $app-base-padding;
     left: $app-base-padding;
@@ -25,5 +26,25 @@ body {
     margin: 0;
     width: inherit;
     font-weight: inherit;
+  }
+
+  .Onboarding-phone {
+    background: $color-phone;
+    width: 110px;
+    height: 230px;
+    border-radius: 20px;
+    margin: 10px auto 40px auto;
+    border: 2px solid lighten($color-mine-shaft, 20);
+    position: relative;
+
+    .Onboarding-phone-screen {
+      background: url(http://www.tonymacx86.com/attachments/iphone/58572d1370954233-post-screenshot-your-iphone-home-screen-photo1.jpg);
+      background-size: cover;
+      position: absolute;
+      top: 30px;
+      right: 5px;
+      bottom: 30px;
+      left: 5px;
+    }
   }
 }

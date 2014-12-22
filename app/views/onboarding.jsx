@@ -27,6 +27,9 @@ var Onboarding = module.exports = React.createClass({
     return (
       <div className="Onboarding">
         <h1>Anonymously “Like” or “Skip” developers Gitr suggests</h1>
+        <div className="Onboarding-phone">
+          <div className="Onboarding-phone-screen"></div>
+        </div>
         <Button>Log In with GitHub</Button>
         <h3>* Gitr doesn’t access or post to any of your repos</h3>
       </div>
