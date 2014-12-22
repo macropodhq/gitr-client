@@ -24,7 +24,7 @@ var Detail = module.exports = React.createClass({
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}}>
         <div className="Detail">
           <h1>Conrad Pancake</h1>
         </div>

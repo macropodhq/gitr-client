@@ -10,15 +10,29 @@ require('./app.scss');
 
 var Wrapper = module.exports = React.createClass({
   displayName: 'Wrapper',
+
+  getLeftButton() {
+    if (this.props.leftLink) {
+      return (
+        <Router.Link
+          to={this.props.leftLink.to}
+          params={this.props.leftLink.params || {}}
+        >
+          <Icon type={this.props.leftLink.iconType} font={false}/>
+        </Router.Link>
+      );
+    } else {
+      return;
+    }
+  },
+
   render() {
     return (
       <div className="App">
         <header>
           <nav className="App-nav">
             <div className="App-nav-item">
-              <Router.Link to="swipe">
-                <Icon type="settings" font={false}/>
-              </Router.Link>
+              {this.getLeftButton()}
             </div>
             <h1>Gitr</h1>
             <div className="App-nav-item App-nav-item--message">
