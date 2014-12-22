@@ -5,6 +5,8 @@ var keyMirror = require('react/lib/keyMirror');
 // don't generate this dynamically - grep is important
 
 module.exports = keyMirror({
+  LOGIN_PENDING: null,
+  LOGIN_COMPLETE: null,
   PERSON_LOAD_PENDING: null,
   PERSON_LOAD_COMPLETE: null,
   PERSON_GET_PENDING: null,
