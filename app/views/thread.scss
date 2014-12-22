@@ -11,10 +11,11 @@ $input-height: 40px;
 
 .Thread {
   height: 100%;
+
   .Thread-messages {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: $app-base-padding $app-base-padding 0 $app-base-padding;
     @extend %clearfix;
     height: calc(100% - #{$input-height});
     overflow: auto;
