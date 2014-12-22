@@ -1,33 +1,23 @@
-A simple template for react (or not) projects
+gitr client
+===========
 
-Contributions welcome
-
-
-Features
-=====
-
-no gulp or grunt
-
+Client code for [gitr.io](http://gitr.io/) - TODO: a tagline
 
 Install
-=====
+-------
 
-npm install
+> $ npm install
 
+Run for Development
+-------------------
 
-Run
-=====
+> $ npm start
 
-npm start
-or on a custom port PORT=3000 npm start
+or on a custom port:
 
-Build
-=====
+> $ PORT=3000 npm start
 
-npm build
+Build for Production
+--------------------
 
-
-Further reading
-=====
-
-https://github.com/petehunt/webpack-howto
+> $ npm build
