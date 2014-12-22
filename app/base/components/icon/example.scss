@@ -1,0 +1,15 @@
+.IconExample {
+  -webkit-column-width: 14em;
+  -moz-column-width: 14em;
+  column-width: 14em;
+  list-style: none;
+  padding: 0;
+
+  .Icon {
+  	margin-right: 5px;
+  }
+}
+
+.IconExample--large {
+  font-size: 2em;
+}

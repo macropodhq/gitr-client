@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Router = require('react-router');
+var Icon = require('../base/components/icon');
 
 var log = require('bows')('Wrapper View');
 
@@ -14,7 +15,7 @@ var Wrapper = module.exports = React.createClass({
       <div className="App">
         <header>
           <nav>
-            nav
+            <Icon type="bubbles"/>
           </nav>
         </header>
 
