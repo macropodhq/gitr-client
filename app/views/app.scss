@@ -32,6 +32,8 @@ h1 {
 
 .App-content {
   padding: $app-base-padding;
+  height: calc(100% - #{$app-header-height});
+  overflow-y: auto;
 }
 
 header {

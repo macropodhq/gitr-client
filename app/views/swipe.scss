@@ -8,10 +8,13 @@ $color-yes: $color-emerald;
 $color-no: $color-alizarin;
 
 .Swipe {
+  height: 100%;
+
   .Swipe-cards {
     max-width: 300px;
     margin: 0 auto;
     position: relative;
+    height: calc((100% - #{$app-header-height}) - 70px);
 
     .Swipe-card, .Swipe-card-next, .Swipe-card-next:before {
       background: $color-white;
@@ -22,6 +25,7 @@ $color-no: $color-alizarin;
     .Swipe-card, .Swipe-card-next {
       padding: 5px;
       position: relative;
+      height: 100%;
 
       h4 {
         margin: 0 auto;
@@ -41,8 +45,8 @@ $color-no: $color-alizarin;
       .Swipe-card-image {
         max-width: 100%;
         background-size: cover;
-        height: 250px;
         border-radius: 2px;
+        height: calc(100% - 46px);
       }
     }
 
@@ -66,6 +70,8 @@ $color-no: $color-alizarin;
 
       .Swipe-status--no {
         border-color: $color-no;
+        left: auto;
+        right: 20px;
       }
 
       .Swipe-status--yes {
