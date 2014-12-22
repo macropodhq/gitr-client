@@ -9,12 +9,9 @@ require('./app.scss');
 
 var App = module.exports = React.createClass({
 	displayName: 'App',
-
   render() {
     return (
-      <div className="App">
-        <Router.RouteHandler {...this.props} />
-      </div>
+      <Router.RouteHandler {...this.props} />
     );
   }
 });

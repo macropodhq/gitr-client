@@ -1,4 +1,5 @@
 @import "colors";
+@import "variables";
 
 html, body, .App {
   height: 100%;
@@ -21,4 +22,18 @@ html {
 h1 {
   font-size: 22px;
   font-weight: 100;
+}
+
+.App {
+  background: lighten($color-hastamayana, 15);
+}
+
+.App-content {
+  padding: $app-base-padding;
+}
+
+header {
+  background: $color-blue-light-special;
+  color: $color-white;
+  padding: $app-base-padding / 2;
 }

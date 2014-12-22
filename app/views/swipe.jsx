@@ -4,6 +4,7 @@ var React = require('react');
 var Fluxxor = require('fluxxor');
 var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
+var Wrapper = require('./wrapper');
 
 var log = require('bows')('Swipe View');
 
@@ -23,9 +24,11 @@ var Swipe = module.exports = React.createClass({
 
   render() {
     return (
-      <div className="Swipe">
-        let`s climb everest
-      </div>
+      <Wrapper>
+        <div className="Swipe">
+          let`s climb everest
+        </div>
+      </Wrapper>
     );
   }
 });
