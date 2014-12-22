@@ -26,7 +26,7 @@ var Thread = module.exports = React.createClass({
 
   render() {
     return (
-      <Wrapper leftLink={{to: 'messages', iconType: 'nav-left'}}>
+      <Wrapper leftLink={{to: 'messages', iconType: 'nav-left'}} heading="Conrad Pancake">
         <div className="Thread">
           <ul className="Thread-messages">
             <li className="Thread-message Thread-message--me">
