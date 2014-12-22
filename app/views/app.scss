@@ -37,6 +37,8 @@ a, a:visited {
 .App-content {
   height: calc(100% - #{$app-header-height});
   overflow-y: auto;
+  background-color: #646c7c;
+  background-image: radial-gradient(ellipse at center, #646c7c 30%, #4e5766 100%);
 }
 
 header {
@@ -63,6 +65,7 @@ header {
     h1 {
       width: 60%;
       font-weight: 600;
+      font-size: 18px;
       margin: 0;
       float: left;
       margin: 0;
