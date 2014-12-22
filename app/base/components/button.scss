@@ -1,3 +1,5 @@
+@import "colors";
+
 $button-font-family: 'Open Sans', 'Helvetica Neue', 'Arial', 'Helvetica', 'sans-serif' !default;
 $button-font-weight: 400 !default;
 $button-font-size: .8em !default;
@@ -33,5 +35,54 @@ $button-font-size: .8em !default;
 
   &:hover {
     opacity: .9;
+  }
+}
+
+$color-button-default: $color-white;
+$color-button-default-background: $color-kill-the-kindness;
+
+$color-button-success: $color-white;
+$color-button-success-background: $color-blue-light-special;
+$color-button-success-disabled-background: scale-color($color-blue-light-special, $lightness: 50%);
+
+$color-button-cancel: $color-sharp-suit;
+$color-button-cancel-background: transparent;
+$color-button-hover-cancel: red;
+
+$color-button-skeleton: $color-sharp-suit;
+
+
+
+@mixin button($color, $background) {
+  cursor: pointer;
+  color: $color;
+  background: $background;
+  border-bottom-color: darken($background, 15%);
+}
+
+.Button {
+  @include button($color-button-default, $color-button-default-background);
+
+  &.Button--success {
+    @include button($color-button-success, $color-button-success-background);
+
+    &[disabled] {
+      background-color: $color-button-success-disabled-background;
+    }
+  }
+
+  &.Button--cancel {
+    color: $color-button-cancel;
+    background: $color-button-cancel-background;
+
+    &:hover {
+      color: $color-button-hover-cancel;
+    }
+  }
+
+  &.Button--skeleton {
+    color: $color-button-skeleton;
+    border-color: transparent;
+    background-color: transparent;
   }
 }
