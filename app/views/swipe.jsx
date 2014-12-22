@@ -23,7 +23,7 @@ var Swipe = module.exports = React.createClass({
     var SuggestionStore = this.getFlux().store('SuggestionStore');
 
     if (SuggestionStore.length() === 0 && SuggestionStore.isLoading === false) {
-      this.getFlux().actions.peopleFetch();
+      this.scheduleFetch();
     }
 
     var list = SuggestionStore.peek(3);
@@ -41,13 +41,34 @@ var Swipe = module.exports = React.createClass({
         pageXOrigin: 0,
         directionOrigin: 'none',
         direction: 'none'
-      }
-    }
+      },
+    };
   },
 
   componentDidMount() {
     this.minToAccept = (window.innerWidth / 2) - 40;
     this.thresholdToStart = 20;
+  },
+
+  componentWillUnmount() {
+    if (this.state.timer !== null) {
+      clearTimeout(this.state.timer);
+    }
+  },
+
+  scheduleFetch() {
+    var SuggestionStore = this.getFlux().store('SuggestionStore');
+
+    if (SuggestionStore.timer !== null) {
+      return;
+    }
+
+    var flux = this.getFlux();
+
+    SuggestionStore.timer = setTimeout(function() {
+      flux.actions.peopleFetch();
+      SuggestionStore.timer = null;
+    }, SuggestionStore.timeout);
   },
 
   handleTouchStart(event) {

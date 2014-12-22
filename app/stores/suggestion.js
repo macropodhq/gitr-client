@@ -12,6 +12,9 @@ var SuggestionStore = module.exports = Fluxxor.createStore({
   initialize: function() {
     this.models = [];
 
+    this.timer = null;
+    this.timeout = 1;
+
     this.isLoading = false;
     this.error = null;
 
@@ -24,7 +27,15 @@ var SuggestionStore = module.exports = Fluxxor.createStore({
   },
 
   handleLoadPending: Common.handleLoadPending,
-  handleLoadComplete: Common.handleLoadComplete,
+  handleLoadComplete: function(payload) {
+    if (Array.isArray(payload.models) && payload.models.length === 0) {
+      this.timeout = Math.min(this.timeout * 2 + 1000, 1000 * 60);
+    } else {
+      this.timeout = 1;
+    }
+
+    return Common.handleLoadComplete.call(this, payload);
+  },
   getAll: Common.getAll,
   getState: Common.getState,
 
