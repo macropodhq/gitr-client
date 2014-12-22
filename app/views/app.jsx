@@ -8,7 +8,7 @@ var Router = require('react-router');
 
 var log = require('bows')('App View');
 
-var Onboarding = require("./onboarding");
+var Landing = require("./landing");
 
 require('./app.scss');
 
@@ -32,7 +32,7 @@ var App = module.exports = React.createClass({
   render() {
     if (!this.state.jwt || !this.state.profile) {
       return (
-        <Onboarding githubClientToken={this.props.githubClientToken} />
+        <Landing githubClientToken={this.props.githubClientToken} />
       );
     }
 

@@ -10,7 +10,6 @@ var log = require('bows')('Routes');
 
 var AppView = require('./views/app');
 var SwipeView = require('./views/swipe');
-var OnboardingView = require('./views/onboarding');
 var MessagesView = require('./views/messages');
 var DetailView = require('./views/detail');
 var ThreadView = require('./views/thread');
