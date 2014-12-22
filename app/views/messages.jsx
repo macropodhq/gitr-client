@@ -25,7 +25,7 @@ var Messages = module.exports = React.createClass({
 
   render() {
     return (
-      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}}>
+      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} heading="Messages">
         <div className="Messages">
           <ul className="Messages-users">
             <li>

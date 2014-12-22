@@ -185,7 +185,7 @@ var Swipe = module.exports = React.createClass({
     });
 
     return (
-      <Wrapper>
+      <Wrapper rightLink={{to: 'messages', iconType: 'bubble'}}>
         <div className="Swipe">
           <div className="Swipe-cards">
             <div className="Swipe-card" style={style} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>

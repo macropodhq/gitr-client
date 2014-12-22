@@ -26,6 +26,21 @@ var Wrapper = module.exports = React.createClass({
     }
   },
 
+  getRightButton() {
+    if (this.props.rightLink) {
+      return (
+        <Router.Link
+          to={this.props.rightLink.to}
+          params={this.props.rightLink.params || {}}
+        >
+          <Icon type={this.props.rightLink.iconType} font={false}/>
+        </Router.Link>
+      );
+    } else {
+      return;
+    }
+  },
+
   render() {
     return (
       <div className="App">
@@ -36,9 +51,7 @@ var Wrapper = module.exports = React.createClass({
             </div>
             <h1>{this.props.heading || 'Gitr'}</h1>
             <div className="App-nav-item App-nav-item--message">
-              <Router.Link to="messages">
-                <Icon type="bubble" className="App-nav-item" font={false}/>
-              </Router.Link>
+              {this.getRightButton()}
             </div>
           </nav>
         </header>
