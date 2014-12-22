@@ -40,8 +40,8 @@ a, a:visited {
 }
 
 header {
-  background: $color-blue-light-special;
-  color: $color-white;
+  background: $color-white;
+  color: #a4a2b2;
   padding: $app-base-padding / 2;
   height: $app-header-height;
 
@@ -62,6 +62,8 @@ header {
 
     h1 {
       width: 60%;
+      font-weight: 600;
+      margin: 0;
       float: left;
       margin: 0;
       text-align: center;
