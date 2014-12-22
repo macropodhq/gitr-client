@@ -16,8 +16,8 @@ var Wrapper = module.exports = React.createClass({
         <header>
           <nav className="App-nav">
             <div className="App-nav-item">
-              <Router.Link to="messages">
-                <Icon type="user" font={false}/>
+              <Router.Link to="swipe">
+                <Icon type="users" font={false}/>
               </Router.Link>
             </div>
             <h1>Gitr</h1>
