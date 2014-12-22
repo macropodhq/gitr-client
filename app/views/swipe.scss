@@ -10,6 +10,9 @@ $color-no: $color-alizarin;
 .Swipe {
   height: 100%;
   padding: $app-base-padding;
+  background-color: #646c7c;
+  background-image: radial-gradient(ellipse at center, #646c7c 30%, #4e5766 100%);
+  background-size: 100%;
 
   .Swipe-cards {
     max-width: 300px;

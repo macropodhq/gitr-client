@@ -43,6 +43,7 @@ header {
   background: $color-blue-light-special;
   color: $color-white;
   padding: $app-base-padding / 2;
+  height: $app-header-height;
 
   .App-nav {
     @extend %clearfix;
