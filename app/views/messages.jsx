@@ -24,7 +24,7 @@ var Messages = module.exports = React.createClass({
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper leftLink={{to: 'swipe', iconType: 'users'}}>
         <div className="Messages">
           talk the talk
         </div>
