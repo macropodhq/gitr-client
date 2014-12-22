@@ -41,23 +41,23 @@ var config = module.exports = {
   },
   module: {
     loaders: [
-    { test: /\.js$/, loaders: ['jsx?harmony'] },
-    { test: /\.jsx$/, loaders: jsxLoader },
-    {
-      test: /\.scss$/,
-      loaders: [
-      'style-loader',
-      'css-loader',
-      'autoprefixer-loader',
-      'sass-loader?includePaths[]=./app/base/style,includePaths[]=./node_modules'
-      ],
-    },
-    { test: /\.css$/,   loader: 'style-loader!css-loader' },
-    { test: /\.png$/,   loader: 'url-loader' },
-    { test: /\.woff$/,  loader: 'url-loader?mimetype=application/font-woff' },
-    { test: /\.ttf$/,   loader: 'url-loader?' },
-    { test: /\.eot$/,   loader: 'url-loader?' },
-    { test: /\.svg$/,   loader: 'raw-loader?' },
+      { test: /\.js$/, loaders: ['jsx?harmony'] },
+      { test: /\.jsx$/, loaders: jsxLoader },
+      {
+        test: /\.scss$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
+          'autoprefixer-loader',
+          'sass-loader?includePaths[]=./app/base/style,includePaths[]=./node_modules'
+        ],
+      },
+      { test: /\.css$/,   loader: 'style-loader!css-loader' },
+      { test: /\.png$/,   loader: 'url-loader' },
+      { test: /\.woff$/,  loader: 'url-loader?mimetype=application/font-woff' },
+      { test: /\.ttf$/,   loader: 'url-loader?' },
+      { test: /\.eot$/,   loader: 'url-loader?' },
+      { test: /\.svg$/,   loader: 'raw-loader?' },
     ],
   },
 };

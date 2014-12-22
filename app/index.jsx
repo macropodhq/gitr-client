@@ -2,58 +2,25 @@
 
 var React = require('react');
 var Router = require('react-router');
+var Fluxxor = require('fluxxor');
+var defaults = require('superagent-defaults');
+
+var routes = require('./routes');
+var createStores = require('./stores');
+var createActions = require('./actions');
 
 var log = require('bows')('App');
 
-require('./index.scss');
+var startApp = function startApp(baseUrl, token) {
+  var authorisedAgent = defaults().set('authorization', 'Bearer ' + token);
 
-var App = React.createClass({
-  render() {
-    return (
-      <div className="App">
-        <h1>TEH NEW APP</h1>
-        <Router.Link to="someview">GO TO SOMEVIEW</Router.Link>
-        <br />
-        <Router.Link to="/">GO TO HOME</Router.Link>
-        <Router.RouteHandler {...this.props}/>
-      </div>
-    );
-  }
-});
+  var flux = new Fluxxor.Flux(createStores(), createActions(authorisedAgent, baseUrl));
 
-var SomeView = React.createClass({
-  render() {
-    return (
-      <div>
-        Some view
-      </div>
-    );
-  }
-});
+  Router.run(routes, (Handler, state) => {
+    log('route change', state);
 
-var DefaultView = React.createClass({
-  render() {
-    return (
-      <div>
-        Default View
-      </div>
-    );
-  }
-});
+    React.render(<Handler flux={flux} />, document.body);
+  });
+};
 
-var routes = (
-  <Router.Route name="app" path="/" handler={App}>
-    <Router.DefaultRoute handler={DefaultView}/>
-    <Router.Route name="someview" path="/something" handler={SomeView}/>
-
-  </Router.Route>
-);
-
-
-Router.run(routes, (Handler, state) => {
-  log('route change', state);
-
-  // store logic here if required
-
-  React.render(<Handler/>, document.body);
-});
+startApp('https://api.gitr.io/api/v1', 'not a real token');
