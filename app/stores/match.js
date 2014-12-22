@@ -14,6 +14,7 @@ var MatchStore = module.exports = Fluxxor.createStore({
 
     this.isLoading = false;
     this.error = null;
+    this.createCompleteWaiting = [];
     this.updateCompleteWaiting = [];
     this.deleteCompleteWaiting = [];
 

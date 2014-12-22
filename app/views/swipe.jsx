@@ -16,14 +16,25 @@ var Swipe = module.exports = React.createClass({
 
   mixins: [
     FluxMixin,
-    StoreWatchMixin('PersonStore'),
+    StoreWatchMixin('SuggestionStore'),
   ],
 
   getStateFromFlux() {
-    return {};
+    var SuggestionStore = this.getFlux().store('SuggestionStore');
+
+    if (SuggestionStore.length() === 0 && SuggestionStore.isLoading === false) {
+      this.getFlux().actions.peopleFetch();
+    }
+
+    var list = SuggestionStore.peek(3);
+
+    return {
+      first: list[0],
+      list: list.slice(1),
+    };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       gesture: {
         pageX: 0,
@@ -39,7 +50,7 @@ var Swipe = module.exports = React.createClass({
     this.thresholdToStart = 20;
   },
 
-  handleTouchStart: function(event) {
+  handleTouchStart(event) {
     if (event.touches.length == 1){ // Only deal with one finger
       var touch = event.touches[0]; // Get the information for finger #1
 
@@ -54,7 +65,7 @@ var Swipe = module.exports = React.createClass({
     }
   },
 
-  handleTouchMove: function(event) {
+  handleTouchMove(event) {
     var gesture = this.state.gesture;
 
     if (event.touches.length == 1){ // Only deal with one finger
@@ -94,13 +105,13 @@ var Swipe = module.exports = React.createClass({
     }
   },
 
-  handleTouchEnd: function(event) {
+  handleTouchEnd(event) {
     if (this.getAcceptanceStatus() > 1) {
-      this.handleYes();
+      this.handleChoice(true);
     }
 
     if (this.getAcceptanceStatus() < -1) {
-      this.handleNo();
+      this.handleChoice(false);
     }
 
     this.setState({
@@ -113,7 +124,7 @@ var Swipe = module.exports = React.createClass({
     })
   },
 
-  getRotation: function() {
+  getRotation() {
     var initialX = this.state.gesture.pageXOrigin;
     var currentX = this.state.gesture.pageX;
     var maxX = window.innerWidth;
@@ -128,7 +139,7 @@ var Swipe = module.exports = React.createClass({
     return rotation;
   },
 
-  getTranslation: function() {
+  getTranslation() {
     var maxY = 200;
     var initialX = this.state.gesture.pageXOrigin;
     var currentX = this.state.gesture.pageX;
@@ -139,7 +150,7 @@ var Swipe = module.exports = React.createClass({
     return movementX + 'px, ' + movementY + 'px';
   },
 
-  getAcceptanceStatus: function() {
+  getAcceptanceStatus() {
     var initialX = this.state.gesture.pageXOrigin;
     var currentX = this.state.gesture.directionOrigin === 'right'  ? this.state.gesture.pageX - this.thresholdToStart : this.state.gesture.pageX + this.thresholdToStart;
     var totalDrag = this.state.gesture.directionOrigin === 'right' ? currentX - initialX : initialX - currentX;
@@ -149,12 +160,13 @@ var Swipe = module.exports = React.createClass({
     return progress;
   },
 
-  handleYes: function() {
-    alert('Yeah, you love em')
-  },
+  handleChoice(match) {
+    this.getFlux().actions.matchCreate({
+      person: this.state.first,
+      match: match,
+    });
 
-  handleNo: function() {
-    alert('Haters gunna hate hate hate');
+    this.getFlux().store('SuggestionStore').shift();
   },
 
   render() {
@@ -188,32 +200,36 @@ var Swipe = module.exports = React.createClass({
       <Wrapper rightLink={{to: 'messages', iconType: 'bubble'}}>
         <div className="Swipe">
           <div className="Swipe-cards">
-            <div className="Swipe-card" style={style} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>
-              <div className="Swipe-card-image" style={{'background-image': 'url(https://avatars1.githubusercontent.com/u/479055)'}}></div>
-              <div className="Swipe-card-details">
-                <h4>Conrad Pankoff</h4>
-                <div className="Swipe-card-details-icons">
-                  icons?
+            { this.state.first &&
+              <div className="Swipe-card" style={style} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>
+                <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.first.avatar_url + ')'}}></div>
+                <div className="Swipe-card-details">
+                  <h4>{'@' + this.state.first.login}</h4>
+                  <div className="Swipe-card-details-icons">
+                    icons?
+                  </div>
                 </div>
+                <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? '✓' : '×'}</div>
               </div>
-              <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? '✓' : '×'}</div>
-            </div>
+            }
 
-            <div className="Swipe-card-next">
-              <div className="Swipe-card-image" style={{'background-image': 'url(https://avatars2.githubusercontent.com/u/2898239)'}}></div>
-              <div className="Swipe-card-details">
-                <h4>James Coleman</h4>
-                <div className="Swipe-card-details-icons">
-                  icons?
+            { (this.state.list.length > 0) &&
+              <div className="Swipe-card-next">
+                <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.list[0].avatar_url + ')'}}></div>
+                <div className="Swipe-card-details">
+                  <h4>{'@' + this.state.list[0].login}</h4>
+                  <div className="Swipe-card-details-icons">
+                    icons?
+                  </div>
                 </div>
               </div>
-            </div>
+            }
           </div>
 
           <div className="Swipe-controls">
-            <div className="Swipe-control Swipe-control--no" onClick={this.handleNo}>×</div>
+            <div className="Swipe-control Swipe-control--no" onClick={this.handleChoice.bind(null, false)} disabled={(this.state.first === null)}>×</div>
             <Router.Link className="Swipe-control Swipe-control--info" to="detail">i</Router.Link>
-            <div className="Swipe-control Swipe-control--yes" onClick={this.handleYes}>✓</div>
+            <div className="Swipe-control Swipe-control--yes" onClick={this.handleChoice.bind(null, true)} disabled={(this.state.first === null)}>✓</div>
           </div>
         </div>
       </Wrapper>

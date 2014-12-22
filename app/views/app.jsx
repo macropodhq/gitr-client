@@ -34,6 +34,8 @@ var App = module.exports = React.createClass({
       return (
         <Landing githubClientToken={this.props.githubClientToken} />
       );
+    } else {
+      this.getFlux().actions.setJwt(this.state.jwt);
     }
 
     return (

@@ -18,8 +18,6 @@ var PersonStore = module.exports = Fluxxor.createStore({
     this.deleteCompleteWaiting = [];
 
     this.bindActions(
-      constants.PERSON_LOAD_PENDING, this.handleLoadPending,
-      constants.PERSON_LOAD_COMPLETE, this.handleLoadComplete,
       constants.PERSON_GET_PENDING, this.handleGetPending,
       constants.PERSON_GET_COMPLETE, this.handleGetComplete,
       constants.PERSON_UPDATE_REMOTE, this.handleUpdateRemote,
@@ -29,8 +27,6 @@ var PersonStore = module.exports = Fluxxor.createStore({
     log('INIT', this);
   },
 
-  handleLoadPending: Common.handleLoadPending,
-  handleLoadComplete: Common.handleLoadComplete,
   handleGetPending: Common.handleGetPending,
   handleGetComplete: Common.handleGetComplete,
   handleUpdateRemote: Common.handleUpdateRemote,
