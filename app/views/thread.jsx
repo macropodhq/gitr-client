@@ -6,6 +6,7 @@ var Router = require('react-router');
 var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var Wrapper = require('./wrapper');
+var Icon = require('../base/components/icon');
 
 var log = require('bows')('Thread View');
 
@@ -76,7 +77,10 @@ var Thread = module.exports = React.createClass({
             </li>
           </ul>
 
-          <input type="text" className="Thread-input" placeholder="Send a message" />
+          <div className="Thread-add">
+            <input type="text" className="Thread-input" placeholder="Send a message" />
+            <Icon className="Thread-add-submit" type="nav-right" font={false}/>
+          </div>
         </div>
       </Wrapper>
     );

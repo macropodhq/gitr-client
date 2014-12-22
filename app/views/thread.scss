@@ -6,6 +6,7 @@ $color-message-background: $color-white;
 $color-time: $color-hastamayana;
 $color-thread-input-background: $color-white;
 $color-thread-input-border: $color-retail-monkey;
+$color-thread-submit-button: $color-hastamayana;
 
 $input-height: 40px;
 
@@ -65,6 +66,26 @@ $input-height: 40px;
     }
   }
 
+  .Thread-add {
+    position: relative;
+
+    .Thread-add-submit {
+      position: absolute;
+      right: 10px;
+      top: 7px;
+      background: $color-thread-submit-button;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      padding-top: 6px;
+
+      path {
+        fill: $color-white;
+      }
+    }
+  }
+
   .Thread-input {
     background: $color-thread-input-background;
     border: 0;
@@ -72,6 +93,6 @@ $input-height: 40px;
     height: $input-height;
     width: 100%;
     font-size: 14px;
-    padding: 0 ($app-base-padding/2);
+    padding: 0 50px 0 ($app-base-padding/2);
   }
 }
