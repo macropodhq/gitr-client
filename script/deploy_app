@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ ! -z "$HOSTS" ]; then
+    for host in $HOSTS
+    do
+	echo "Deploying to $host"
+	ssh -o StrictHostKeyChecking=no -l deploy $host sudo -H /usr/local/bin/deploy_gitr_client
+    done
+fi
+
