@@ -48,6 +48,29 @@ $color-no: $color-alizarin;
 
     .Swipe-card {
       z-index: 1;
+
+      .Swipe-status {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 35px;
+        height: 35px;
+        font-size: 22px;
+        background: $color-control-background;
+        border: 5px solid $color-control-border;
+        z-index: 2;
+        text-align: center;
+        border-radius: 50%;
+        opacity: 0;
+      }
+
+      .Swipe-status--no {
+        border-color: $color-no;
+      }
+
+      .Swipe-status--yes {
+        border-color: $color-yes;
+      }
     }
 
     .Swipe-card-next {

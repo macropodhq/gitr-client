@@ -95,11 +95,11 @@ var Swipe = module.exports = React.createClass({
 
   handleTouchEnd: function(event) {
     if (this.getAcceptanceStatus() > 1) {
-      alert('Yeah, you love em')
+      this.handleYes();
     }
 
     if (this.getAcceptanceStatus() < -1) {
-      alert('Haters gunna hate hate hate');
+      this.handleNo();
     }
 
     this.setState({
@@ -140,18 +140,48 @@ var Swipe = module.exports = React.createClass({
 
   getAcceptanceStatus: function() {
     var initialX = this.state.gesture.pageXOrigin;
-    var currentX = this.state.gesture.directionOrigin === 'right'  ? this.state.gesture.pageX - thresholdToStart : this.state.gesture.pageX + thresholdToStart;
+    var currentX = this.state.gesture.directionOrigin === 'right'  ? this.state.gesture.pageX - this.thresholdToStart : this.state.gesture.pageX + this.thresholdToStart;
     var totalDrag = this.state.gesture.directionOrigin === 'right' ? currentX - initialX : initialX - currentX;
     totalDrag = this.state.gesture.directionOrigin === 'right' ? totalDrag : totalDrag * -1;
-    var progress = totalDrag / minToAccept;
+    var progress = totalDrag / this.minToAccept;
 
     return progress;
+  },
+
+  handleYes: function() {
+    alert('Yeah, you love em')
+  },
+
+  handleNo: function() {
+    alert('Haters gunna hate hate hate');
   },
 
   render() {
     var style = {
       'transform': 'rotate(' + this.getRotation() + 'deg) translate(' + this.getTranslation() + ')'
     };
+
+    var color = 'black';
+
+    if (this.getAcceptanceStatus() > 1) {
+      color = 'green';
+    }
+
+    if (this.getAcceptanceStatus() < -1) {
+      color = 'red';
+    }
+
+    var statusStyle = {
+      'opacity': this.state.gesture.directionOrigin === 'right' ? this.getAcceptanceStatus() : this.getAcceptanceStatus() * -1,
+      'color': color
+    }
+
+    var cx = React.addons.classSet;
+    var statusClass = cx({
+      'Swipe-status': true,
+      'Swipe-status--no': this.state.gesture.directionOrigin === 'left',
+      'Swipe-status--yes': this.state.gesture.directionOrigin === 'right'
+    });
 
     return (
       <Wrapper>
@@ -165,6 +195,7 @@ var Swipe = module.exports = React.createClass({
                   icons?
                 </div>
               </div>
+              <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? '✓' : '×'}</div>
             </div>
 
             <div className="Swipe-card-next">
@@ -179,9 +210,9 @@ var Swipe = module.exports = React.createClass({
           </div>
 
           <div className="Swipe-controls">
-            <div className="Swipe-control Swipe-control--no">×</div>
+            <div className="Swipe-control Swipe-control--no" onClick={this.handleNo}>×</div>
             <div className="Swipe-control Swipe-control--info">i</div>
-            <div className="Swipe-control Swipe-control--yes">✓</div>
+            <div className="Swipe-control Swipe-control--yes" onClick={this.handleYes}>✓</div>
           </div>
         </div>
       </Wrapper>
