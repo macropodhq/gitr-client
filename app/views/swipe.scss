@@ -9,6 +9,7 @@ $color-no: $color-alizarin;
 
 .Swipe {
   height: 100%;
+  padding: $app-base-padding;
 
   .Swipe-cards {
     max-width: 300px;

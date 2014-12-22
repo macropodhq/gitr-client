@@ -2,8 +2,97 @@
 @import "placeholders";
 @import "variables";
 
-$color-user-border: $color-hastamayana;
+$color-message-background: $color-white;
+$color-time: $color-hastamayana;
+$color-thread-input-background: $color-white;
+$color-thread-input-border: $color-retail-monkey;
+$color-thread-submit-button: $color-hastamayana;
+
+$input-height: 40px;
 
 .Thread {
+  height: 100%;
 
+  .Thread-messages {
+    list-style: none;
+    margin: 0;
+    padding: $app-base-padding $app-base-padding 0 $app-base-padding;
+    @extend %clearfix;
+    height: calc(100% - #{$input-height});
+    overflow: auto;
+  }
+
+  .Thread-message {
+    @extend %clearfix;
+    clear: both;
+    max-width: 90%;
+    margin: 10px 0;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      float: left;
+      margin-right: 4px;
+    }
+
+    .Thread-message-copy {
+      border-radius: 3px;
+      float: left;
+      display: block;
+      background: $color-message-background;
+      padding: 5px;
+      max-width: calc(100% - 44px);
+
+      p {
+        padding: 0;
+        margin: 0;
+      }
+
+      .Thread-message-time {
+        font-size: 12px;
+        color: $color-time;
+      }
+    }
+  }
+
+  .Thread-message--me {
+    float: right;
+
+    img {
+      float: right;
+      margin-left: 4px;
+      margin-right: 0;
+    }
+  }
+
+  .Thread-add {
+    position: relative;
+
+    .Thread-add-submit {
+      position: absolute;
+      right: 10px;
+      top: 7px;
+      background: $color-thread-submit-button;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      padding-top: 6px;
+
+      path {
+        fill: $color-white;
+      }
+    }
+  }
+
+  .Thread-input {
+    background: $color-thread-input-background;
+    border: 0;
+    border-top: 2px solid $color-thread-input-border;
+    height: $input-height;
+    width: 100%;
+    font-size: 14px;
+    padding: 0 50px 0 ($app-base-padding/2);
+  }
 }
