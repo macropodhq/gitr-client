@@ -37,6 +37,12 @@ var Swipe = module.exports = React.createClass({
               </div>
             </div>
           </div>
+
+          <div className="Swipe-controls">
+            <div className="Swipe-control Swipe-control--no">×</div>
+            <div className="Swipe-control Swipe-control--info">i</div>
+            <div className="Swipe-control Swipe-control--yes">✓</div>
+          </div>
         </div>
       </Wrapper>
     );

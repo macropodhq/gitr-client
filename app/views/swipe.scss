@@ -2,6 +2,11 @@
 @import "variables";
 @import "placeholders";
 
+$color-control-border: rgba($color-hastamayana, 0.5);
+$color-control-background: $color-white;
+$color-yes: $color-emerald;
+$color-no: $color-alizarin;
+
 .Swipe {
   .Swipe-cards {
     max-width: 300px;
@@ -59,6 +64,38 @@
         bottom: -20px;
         background-color: darken($color-white, 10);
       }
+    }
+  }
+
+  .Swipe-controls {
+    text-align: center;
+    margin-top: 50px;
+
+    .Swipe-control {
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      font-size: 30px;
+      border: 10px solid $color-control-border;
+      background: $color-control-background;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
+
+    .Swipe-control--info {
+      font-size: 20px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .Swipe-control--yes {
+      color: $color-yes;
+    }
+
+    .Swipe-control--no {
+      color: $color-no;
     }
   }
 }
