@@ -156,12 +156,12 @@ var makeDelete = function(authorisedAgent, pendingEvent, completeEvent, urlTempl
 
 module.exports = function createActions(authorisedAgent, baseUrl) {
   return {
-    peopleFetch: makeFetchMultiple(authorisedAgent, constants.PERSON_LOAD_PENDING, constants.PERSON_LOAD_COMPLETE, 'people', new Houkou(baseUrl + '/people')),
-    personFetch: makeFetchOne(authorisedAgent, constants.PERSON_GET_PENDING, constants.PERSON_GET_COMPLETE, new Houkou(baseUrl + '/people/:id')),
-    matchesFetch: makeFetchMultiple(authorisedAgent, constants.MATCH_LOAD_PENDING, constants.MATCH_LOAD_COMPLETE, 'matches', new Houkou(baseUrl + '/matches')),
-    matchFetch: makeFetchOne(authorisedAgent, constants.MATCH_GET_PENDING, constants.MATCH_GET_COMPLETE, new Houkou(baseUrl + '/matches/:id')),
-    matchCreate: makeCreate(authorisedAgent, constants.MATCH_CREATE_PENDING, constants.MATCH_CREATE_COMPLETE, new Houkou(baseUrl + '/matches')),
-    matchUpdate: makeUpdate(authorisedAgent, constants.MATCH_UPDATE_PENDING, constants.MATCH_UPDATE_COMPLETE, new Houkou(baseUrl + '/matches/:id')),
-    matchDelete: makeDelete(authorisedAgent, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/matches/:id')),
+    peopleFetch: makeFetchMultiple(authorisedAgent, constants.PERSON_LOAD_PENDING, constants.PERSON_LOAD_COMPLETE, 'people', new Houkou(baseUrl + '/people.json')),
+    personFetch: makeFetchOne(authorisedAgent, constants.PERSON_GET_PENDING, constants.PERSON_GET_COMPLETE, new Houkou(baseUrl + '/people/:id.json')),
+    matchesFetch: makeFetchMultiple(authorisedAgent, constants.MATCH_LOAD_PENDING, constants.MATCH_LOAD_COMPLETE, 'matches', new Houkou(baseUrl + '/matches.json')),
+    matchFetch: makeFetchOne(authorisedAgent, constants.MATCH_GET_PENDING, constants.MATCH_GET_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
+    matchCreate: makeCreate(authorisedAgent, constants.MATCH_CREATE_PENDING, constants.MATCH_CREATE_COMPLETE, new Houkou(baseUrl + '/matches.json')),
+    matchUpdate: makeUpdate(authorisedAgent, constants.MATCH_UPDATE_PENDING, constants.MATCH_UPDATE_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
+    matchDelete: makeDelete(authorisedAgent, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
   };
 };
