@@ -11,14 +11,15 @@ $color-no: $color-alizarin;
   .Swipe-cards {
     max-width: 300px;
     margin: 0 auto;
+    position: relative;
 
-    .Swipe-card, .Swipe-card:before, .Swipe-card:after {
+    .Swipe-card, .Swipe-card-next, .Swipe-card-next:before {
       background: $color-white;
       border: 2px solid $color-hastamayana;
       border-radius: 2px;
     }
 
-    .Swipe-card {
+    .Swipe-card, .Swipe-card-next {
       padding: 5px;
       position: relative;
 
@@ -37,31 +38,34 @@ $color-no: $color-alizarin;
         }
       }
 
-      img {
+      .Swipe-card-image {
         max-width: 100%;
+        background-size: cover;
+        height: 250px;
         border-radius: 2px;
       }
+    }
 
-      &:after, &:before {
+    .Swipe-card {
+      z-index: 1;
+    }
+
+    .Swipe-card-next {
+      width: 98%;
+      position: absolute;
+      top: 10px;
+      left: 1%;
+      background-color: darken($color-white, 5);
+
+      &:before {
         content: '';
         background: $color-white;
         border-top: none;
         position: absolute;
-        height: 10px;
-      }
-
-      &:after {
-        width: 98%;
-        left: 1%;
-        bottom: -12px;
-        background-color: darken($color-white, 5);
-      }
-
-      &:before {
         width: 96%;
         left: 2%;
         height: 8px;
-        bottom: -20px;
+        bottom: -10px;
         background-color: darken($color-white, 10);
       }
     }

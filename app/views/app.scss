@@ -27,6 +27,7 @@ h1 {
 
 .App {
   background: lighten($color-hastamayana, 15);
+  overflow-x: hidden;
 }
 
 .App-content {
