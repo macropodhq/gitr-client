@@ -1,6 +1,8 @@
 gitr client
 ===========
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/macropodhq/gitr-client?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Client code for [gitr.io](http://gitr.io/) - TODO: a tagline
 
 Install
