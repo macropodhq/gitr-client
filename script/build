@@ -3,6 +3,5 @@
 set -e
 
 mkdir -p dist
-cp *.html dist
 docker run --rm -i -t -v $PWD:/build -w /build node /bin/sh -c "npm install && npm run build"
 docker build -t macropod/gitr-client .
