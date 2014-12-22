@@ -17,11 +17,19 @@ var Onboarding = module.exports = React.createClass({
 
   mixins: [
     FluxMixin,
-    StoreWatchMixin('PersonStore'),
+    StoreWatchMixin('PersonStore', 'LoginStore'),
   ],
 
   getStateFromFlux() {
-    return {};
+    var LoginStore = this.getFlux().store('LoginStore');
+
+    return {
+      loading: LoginStore.isLoading,
+    };
+  },
+
+  handleLoginClick() {
+    this.getFlux().actions.login(this.props.githubClientToken);
   },
 
   render() {
@@ -32,7 +40,7 @@ var Onboarding = module.exports = React.createClass({
           <div className="Onboarding-phone-screen"></div>
         </div>
         <Router.Link to="swipe">
-          <Button>Log In with GitHub</Button>
+          <Button disabled={this.state.loading} onClick={this.handleLoginClick}>Log In with GitHub</Button>
         </Router.Link>
         <h3>* Gitr doesn’t access or post to any of your repos</h3>
       </div>

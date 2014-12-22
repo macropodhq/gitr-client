@@ -8,6 +8,8 @@ var Router = require('react-router');
 
 var log = require('bows')('App View');
 
+var Onboarding = require("./onboarding");
+
 require('./app.scss');
 
 var App = module.exports = React.createClass({
@@ -27,14 +29,10 @@ var App = module.exports = React.createClass({
     };
   },
 
-  handleLoginClick() {
-    this.getFlux().actions.login(this.props.githubClientToken);
-  },
-
   render() {
     if (!this.state.jwt || !this.state.profile) {
       return (
-        <button onClick={this.handleLoginClick}>Login</button>
+        <Onboarding githubClientToken={this.props.githubClientToken} />
       );
     }
 

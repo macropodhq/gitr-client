@@ -10,6 +10,7 @@ require('./app.scss');
 
 var Wrapper = module.exports = React.createClass({
   displayName: 'Wrapper',
+
   render() {
     return (
       <div className="App">
