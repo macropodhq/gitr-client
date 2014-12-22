@@ -1,3 +1,16 @@
+@import "colors";
+@import "variables";
+
+$color-onboarding-background: $color-smoky;
+$color-onboarding: $color-white;
+
 body {
 //asdf
+}
+
+.Onboarding {
+  background: $color-onboarding-background;
+  color: $color-onboarding;
+  text-align: center;
+  padding: $app-base-padding;
 }
