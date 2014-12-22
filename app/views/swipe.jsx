@@ -23,7 +23,9 @@ var Swipe = module.exports = React.createClass({
 
   render() {
     return (
-      <div className="Swipe" />
+      <div className="Swipe">
+        let`s climb everest
+      </div>
     );
   }
 });

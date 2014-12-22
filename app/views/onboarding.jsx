@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Fluxxor = require('fluxxor');
+var Router = require('react-router');
 var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 
@@ -30,7 +31,9 @@ var Onboarding = module.exports = React.createClass({
         <div className="Onboarding-phone">
           <div className="Onboarding-phone-screen"></div>
         </div>
-        <Button>Log In with GitHub</Button>
+        <Router.Link to="swipe">
+          <Button>Log In with GitHub</Button>
+        </Router.Link>
         <h3>* Gitr doesn’t access or post to any of your repos</h3>
       </div>
     );

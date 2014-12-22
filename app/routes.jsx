@@ -15,5 +15,6 @@ var OnboardingView = require('./views/onboarding');
 module.exports = (
   <Route name="app" path="/" handler={AppView}>
     <DefaultRoute handler={OnboardingView} />
+    <Route name="swipe" path="/explore" handler={SwipeView}/>
   </Route>
 );
