@@ -18,15 +18,17 @@ var Conversation = module.exports = React.createClass({
 
   mixins: [
     FluxMixin,
-    StoreWatchMixin('MatchStore', 'MessageStore'),
+    StoreWatchMixin('MatchStore', 'MessageStore', 'LoginStore'),
     Router.State,
   ],
 
   getStateFromFlux() {
     var MatchStore = this.getFlux().store('MatchStore');
     var MessageStore = this.getFlux().store('MessageStore');
+    var LoginStore = this.getFlux().store('LoginStore');
 
     return {
+      me: LoginStore.getProfile(),
       match: MatchStore.get(this.getParams().id),
       messages: MessageStore.getByMatchId(this.getParams().id),
     };
@@ -78,7 +80,7 @@ var Conversation = module.exports = React.createClass({
 
               return (
                 <li className={'Conversation-message Conversation-message--' + from}>
-                  <img src="https://avatars1.githubusercontent.com/u/479055" />
+                  <img src={(from === "me" ? self.state.me : self.state.match).avatar_url} />
                   <span className="Conversation-message-copy">
                     <p>{message.text}</p>
                     <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
