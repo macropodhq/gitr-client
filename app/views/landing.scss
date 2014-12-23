@@ -106,6 +106,16 @@ html, body {
   font-size: .8em;
   color: $color-grey-lighter;
   vertical-align: middle;
+  &-subtitle {
+    right:10px;
+    position:absolute;
+    text-align:right;
+    @media(max-width:650px) {
+      width:250px;
+      margin-top:-6px;
+    }
+  }
+
   &-logo {
     height: 20px;
     width: 20px;
