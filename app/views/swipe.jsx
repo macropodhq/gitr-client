@@ -218,7 +218,7 @@ var Swipe = module.exports = React.createClass({
     });
 
     return (
-      <Wrapper rightLink={{to: 'messages', iconType: 'bubble'}}>
+      <Wrapper rightLink={{to: 'messages', iconType: 'bubbles'}}>
         { (this.state.first === null) &&
           <h1>LOADING PEOPLES</h1>
         }
