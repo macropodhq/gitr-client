@@ -8,6 +8,7 @@ var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var moment = require('moment');
 var Wrapper = require('./wrapper');
 var Icon = require('../base/components/icon');
+var Spinner = require('react-spinner');
 
 var log = require('bows')('Conversation View');
 
@@ -64,7 +65,11 @@ var Conversation = module.exports = React.createClass({
 
   render() {
     if (!this.state.match) {
-      return <h1>Loading!</h1>
+      return (
+        <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={'loading'}>
+          <Spinner />
+        </Wrapper>
+      )
     }
 
     var self = this;
