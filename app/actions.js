@@ -180,8 +180,6 @@ module.exports = function createActions(baseUrl, pubnubKey) {
         this.pubnub.subscribe({
           channel: channel,
           message(incoming, env, channel) {
-            console.log(incoming);
-
             if (incoming.type === "message") {
               actions.dispatch(constants.MESSAGE_CREATE_REMOTE, {
                 model: {
@@ -230,8 +228,6 @@ module.exports = function createActions(baseUrl, pubnubKey) {
       if (decoded.exp*1000 <= Date.now()) {
         return;
       }
-
-      console.log(jwt);
 
       ctx.setJwt(jwt);
       ctx.connectPubnub(profile.channel, this);
