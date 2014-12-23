@@ -32,7 +32,7 @@ var App = module.exports = React.createClass({
   render() {
     if (!this.state.jwt || !this.state.profile) {
       return (
-        <Landing githubClientToken={this.props.githubClientToken} />
+        <Landing />
       );
     } else {
       this.getFlux().actions.setJwt(this.state.jwt);

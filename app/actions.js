@@ -169,19 +169,19 @@ module.exports = function createActions(baseUrl) {
   };
 
   return {
-    peopleFetch: makeFetchMultiple(ctx, constants.PERSON_LOAD_PENDING, constants.PERSON_LOAD_COMPLETE, 'people', new Houkou(baseUrl + '/people.json')),
-    personFetch: makeFetchOne(ctx, constants.PERSON_GET_PENDING, constants.PERSON_GET_COMPLETE, new Houkou(baseUrl + '/people/:id.json')),
-    matchesFetch: makeFetchMultiple(ctx, constants.MATCH_LOAD_PENDING, constants.MATCH_LOAD_COMPLETE, 'matches', new Houkou(baseUrl + '/matches.json')),
-    matchFetch: makeFetchOne(ctx, constants.MATCH_GET_PENDING, constants.MATCH_GET_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
-    matchCreate: makeCreate(ctx, constants.MATCH_CREATE_PENDING, constants.MATCH_CREATE_COMPLETE, new Houkou(baseUrl + '/matches.json')),
-    matchUpdate: makeUpdate(ctx, constants.MATCH_UPDATE_PENDING, constants.MATCH_UPDATE_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
-    matchDelete: makeDelete(ctx, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/matches/:id.json')),
+    peopleFetch: makeFetchMultiple(ctx, constants.PERSON_LOAD_PENDING, constants.PERSON_LOAD_COMPLETE, 'people', new Houkou(baseUrl + '/v1/people.json')),
+    personFetch: makeFetchOne(ctx, constants.PERSON_GET_PENDING, constants.PERSON_GET_COMPLETE, new Houkou(baseUrl + '/v1/people/:id.json')),
+    matchesFetch: makeFetchMultiple(ctx, constants.MATCH_LOAD_PENDING, constants.MATCH_LOAD_COMPLETE, 'matches', new Houkou(baseUrl + '/v1/matches.json')),
+    matchFetch: makeFetchOne(ctx, constants.MATCH_GET_PENDING, constants.MATCH_GET_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
+    matchCreate: makeCreate(ctx, constants.MATCH_CREATE_PENDING, constants.MATCH_CREATE_COMPLETE, new Houkou(baseUrl + '/v1/matches.json')),
+    matchUpdate: makeUpdate(ctx, constants.MATCH_UPDATE_PENDING, constants.MATCH_UPDATE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
+    matchDelete: makeDelete(ctx, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
 
     setJwt(jwt) {
       ctx.setJwt(jwt);
     },
 
-    login: function(githubClientToken) {
+    login: function() {
       var operationId = uuid.v1();
 
       this.dispatch(constants.LOGIN_PENDING, {
@@ -195,13 +195,17 @@ module.exports = function createActions(baseUrl) {
           return;
         }
 
-        if (typeof ev.data !== "object" || ev.data === null || typeof ev.data.code !== "string") {
+        if (typeof ev.data !== "object" || ev.data === null || typeof ev.data.token !== "string") {
           return;
         }
 
         window.removeEventListener('message', onMessage);
 
-        ctx.agent.post(baseUrl + '/authorize.json').send({code: ev.data.code}).end(function(res) {
+        var token = ev.data.token;
+
+        ctx.setJwt(token);
+
+        ctx.agent.get(baseUrl + '/v1/profile.json').end(function(res) {
           if (!res.ok) {
             return self.dispatch(constants.LOGIN_COMPLETE, {
               operationId: operationId,
@@ -209,18 +213,16 @@ module.exports = function createActions(baseUrl) {
             });
           }
 
-          ctx.setJwt(res.body.token);
-
           return self.dispatch(constants.LOGIN_COMPLETE, {
             operationId: operationId,
-            profile: _.omit(res.body, 'token'),
-            jwt: res.body.token,
+            profile: res.body.person,
+            jwt: token,
           });
         });
       };
       window.addEventListener('message', onMessage);
 
-      window.open('https://github.com/login/oauth/authorize?client_id=' + githubClientToken);
+      window.open(baseUrl + '/auth?redirect_uri=' + escape(window.location.origin + '/login-callback.html'));
     },
   };
 };

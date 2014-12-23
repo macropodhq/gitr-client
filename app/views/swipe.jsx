@@ -23,14 +23,14 @@ var Swipe = module.exports = React.createClass({
     var SuggestionStore = this.getFlux().store('SuggestionStore');
 
     if (SuggestionStore.length() === 0 && SuggestionStore.isLoading === false) {
-      this.getFlux().actions.peopleFetch();
+      this.scheduleFetch();
     }
 
     var list = SuggestionStore.peek(3);
 
     return {
-      first: list[0],
-      list: list.slice(1),
+      first: list[0] || null,
+      more: list.slice(1),
     };
   },
 
@@ -41,13 +41,34 @@ var Swipe = module.exports = React.createClass({
         pageXOrigin: 0,
         directionOrigin: 'none',
         direction: 'none'
-      }
-    }
+      },
+    };
   },
 
   componentDidMount() {
     this.minToAccept = (window.innerWidth / 2) - 40;
     this.thresholdToStart = 20;
+  },
+
+  componentWillUnmount() {
+    if (this.state.timer !== null) {
+      clearTimeout(this.state.timer);
+    }
+  },
+
+  scheduleFetch() {
+    var SuggestionStore = this.getFlux().store('SuggestionStore');
+
+    if (SuggestionStore.timer !== null) {
+      return;
+    }
+
+    var flux = this.getFlux();
+
+    SuggestionStore.timer = setTimeout(function() {
+      flux.actions.peopleFetch();
+      SuggestionStore.timer = null;
+    }, SuggestionStore.timeout);
   },
 
   handleTouchStart(event) {
@@ -198,9 +219,13 @@ var Swipe = module.exports = React.createClass({
 
     return (
       <Wrapper rightLink={{to: 'messages', iconType: 'bubble'}}>
-        <div className="Swipe">
-          <div className="Swipe-cards">
-            { this.state.first &&
+        { (this.state.first === null) &&
+          <h1>LOADING PEOPLES</h1>
+        }
+
+        { (this.state.first !== null) && 
+          <div className="Swipe">
+            <div className="Swipe-cards">
               <div className="Swipe-card" style={style} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>
                 <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.first.avatar_url + ')'}}></div>
                 <div className="Swipe-card-details">
@@ -211,27 +236,27 @@ var Swipe = module.exports = React.createClass({
                 </div>
                 <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? '✓' : '×'}</div>
               </div>
-            }
 
-            { (this.state.list.length > 0) &&
-              <div className="Swipe-card-next">
-                <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.list[0].avatar_url + ')'}}></div>
-                <div className="Swipe-card-details">
-                  <h4>{'@' + this.state.list[0].login}</h4>
-                  <div className="Swipe-card-details-icons">
-                    icons?
+              { (this.state.more.length > 0) &&
+                <div className="Swipe-card-next">
+                  <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.more[0].avatar_url + ')'}}></div>
+                  <div className="Swipe-card-details">
+                    <h4>{'@' + this.state.more[0].login}</h4>
+                    <div className="Swipe-card-details-icons">
+                      icons?
+                    </div>
                   </div>
                 </div>
-              </div>
-            }
-          </div>
+              }
+            </div>
 
-          <div className="Swipe-controls">
-            <div className="Swipe-control Swipe-control--no" onClick={this.handleChoice.bind(null, false)} disabled={(this.state.first === null)}>×</div>
-            <Router.Link className="Swipe-control Swipe-control--info" to="detail">i</Router.Link>
-            <div className="Swipe-control Swipe-control--yes" onClick={this.handleChoice.bind(null, true)} disabled={(this.state.first === null)}>✓</div>
+            <div className="Swipe-controls">
+              <div className="Swipe-control Swipe-control--no" onClick={this.handleChoice.bind(null, false)}>×</div>
+              <Router.Link className="Swipe-control Swipe-control--info" to="detail">i</Router.Link>
+              <div className="Swipe-control Swipe-control--yes" onClick={this.handleChoice.bind(null, true)}>✓</div>
+            </div>
           </div>
-        </div>
+        }
       </Wrapper>
     );
   }
