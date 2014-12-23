@@ -36,6 +36,7 @@ var SuggestionStore = module.exports = Fluxxor.createStore({
 
     return Common.handleLoadComplete.call(this, payload);
   },
+  get: Common.get,
   getAll: Common.getAll,
   getState: Common.getState,
 
