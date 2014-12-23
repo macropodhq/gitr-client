@@ -33,8 +33,8 @@ var Common = {
     this.emit('change');
   },
 
-  handleGetPending: function() {
-    var model = _.findWhere(this.models, {id: payload.model.id});
+  handleGetPending: function(payload) {
+    var model = _.findWhere(this.models, {id: payload.id});
 
     if (!model) {
       return;

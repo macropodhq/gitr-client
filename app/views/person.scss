@@ -4,19 +4,22 @@
 
 $color-work-background: $color-white;
 $color-work-heading-border: $color-hastamayana;
+$color-pagination-background: $color-hastamayana;
 
 .Detail {
   padding: $app-base-padding;
   margin: 10px;
-  border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(#000, .2);
-  background: $color-white;
 
   #Detail-portfolio {
     .Detail-work {
-      border-radius: 3px;
-      padding: $app-base-padding/2;
-      background: $color-work-background;
+      padding: 0 5px;
+
+      .Detail-work-inside {
+        border-radius: 3px;
+        padding: $app-base-padding/2;
+        background: $color-work-background;
+        box-shadow: 0 1px 3px rgba(#000, .2);
+      }
 
       h2 {
         margin: 0;
@@ -40,6 +43,35 @@ $color-work-heading-border: $color-hastamayana;
           font-size: 13px;
         }
       }
+    }
+  }
+
+  .Detail-portfolio-pagination {
+    margin-top: 20px;
+    text-align: center;
+
+    .Detail-portfolio-pagination-page {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: $color-pagination-background;
+      display: inline-block;
+      margin: 0 2px;
+      opacity: 0.4;
+    }
+
+    .Detail-portfolio-pagination-page--active {
+      opacity: 1;
+    }
+  }
+
+  .Detail-bio {
+    margin-top: 10px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
     }
   }
 }

@@ -184,7 +184,7 @@ var Swipe = module.exports = React.createClass({
   },
 
   handleChoice(match) {
-    this.getFlux().actions.matchCreate({
+    this.getFlux().actions.matchCreate({}, {
       person: this.state.first,
       match: match,
     });
@@ -218,6 +218,8 @@ var Swipe = module.exports = React.createClass({
       'Swipe-status--no': this.state.gesture.directionOrigin === 'left',
       'Swipe-status--yes': this.state.gesture.directionOrigin === 'right'
     });
+
+    console.log(this.state.first)
 
     return (
       <Wrapper rightLink={{to: 'matches', iconType: 'bubbles'}}>
@@ -254,7 +256,7 @@ var Swipe = module.exports = React.createClass({
 
             <div className="Swipe-controls">
               <div className="Swipe-control Swipe-control--no" onClick={this.handleChoice.bind(null, false)}>×</div>
-              <Router.Link className="Swipe-control Swipe-control--info" to="person" params={{name: this.state.first.login}}>i</Router.Link>
+              <Router.Link className="Swipe-control Swipe-control--info" to="person" params={{id: this.state.first.id}}>i</Router.Link>
               <div className="Swipe-control Swipe-control--yes" onClick={this.handleChoice.bind(null, true)}>✓</div>
             </div>
           </div>

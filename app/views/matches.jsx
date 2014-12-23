@@ -17,11 +17,19 @@ var Matches = module.exports = React.createClass({
 
   mixins: [
     FluxMixin,
-    StoreWatchMixin('PersonStore'),
+    StoreWatchMixin('MatchStore'),
   ],
 
   getStateFromFlux() {
-    return {};
+    var MatchStore = this.getFlux().store('MatchStore');
+
+    return {
+      matches: MatchStore.getAll(),
+    };
+  },
+
+  componentDidMount() {
+    this.getFlux().actions.matchesFetch();
   },
 
   render() {
@@ -29,48 +37,17 @@ var Matches = module.exports = React.createClass({
       <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} heading="Matches">
         <div className="Matches">
           <ul className="Matches-users">
-            <li>
-              <Router.Link to="conversation" params={{id: 1}}>
-                <Icon type="nav-right" font={false} />
-                <img src="https://avatars1.githubusercontent.com/u/479055" />
-                <h2>Conrad Pancake</h2>
-              </Router.Link>
-            </li>
-            <li>
-              <Router.Link to="conversation" params={{id: 1}}>
-                <Icon type="nav-right" font={false} />
-                <img src="https://avatars0.githubusercontent.com/u/33324" />
-                <h2>Nathan coffeeface</h2>
-              </Router.Link>
-            </li>
-            <li>
-              <Router.Link to="conversation" params={{id: 1}}>
-                <Icon type="nav-right" font={false} />
-                <img src="https://avatars0.githubusercontent.com/u/33324" />
-                <h2>Nathan coffeeface</h2>
-              </Router.Link>
-            </li>
-            <li>
-              <Router.Link to="conversation" params={{id: 1}}>
-                <Icon type="nav-right" font={false} />
-                <img src="https://avatars0.githubusercontent.com/u/33324" />
-                <h2>Nathan coffeeface</h2>
-              </Router.Link>
-            </li>
-            <li>
-              <Router.Link to="conversation" params={{id: 1}}>
-                <Icon type="nav-right" font={false} />
-                <img src="https://avatars0.githubusercontent.com/u/33324" />
-                <h2>Nathan coffeeface</h2>
-              </Router.Link>
-            </li>
-            <li>
-              <Router.Link to="conversation" params={{id: 1}}>
-                <Icon type="nav-right" font={false} />
-                <img src="https://avatars0.githubusercontent.com/u/33324" />
-                <h2>Nathan coffeeface</h2>
-              </Router.Link>
-            </li>
+            {this.state.matches.map(function(match) {
+              return (
+                <li>
+                  <Router.Link to="conversation" params={{id: match.id || "what how"}}>
+                    <Icon type="nav-right" font={false} />
+                    <img src={match.avatar_url} />
+                    <h2>{'@' + match.login}</h2>
+                  </Router.Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </Wrapper>

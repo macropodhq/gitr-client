@@ -17,7 +17,7 @@ var ConversationView = require('./views/conversation');
 module.exports = (
   <Route name="app" path="/" handler={AppView}>
     <DefaultRoute name="swipe" handler={SwipeView} />
-    <Route name="person" path="/person/:name" handler={PersonView} />
+    <Route name="person" path="/person/:id" handler={PersonView} />
     <Route name="matches" path="/matches" handler={MatchesView} />
     <Route name="conversation" path="/matches/:id" handler={ConversationView} />
   </Route>
