@@ -7,6 +7,7 @@ var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var Wrapper = require('./wrapper');
 var Spinner = require('react-spinner');
+var Icon = require('../base/components/icon');
 
 var log = require('bows')('Swipe View');
 
@@ -232,11 +233,17 @@ var Swipe = module.exports = React.createClass({
             <div className="Swipe-cards">
               <div className="Swipe-card" style={style} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>
                 <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.first.avatar_url + ')'}}></div>
-                <div className="Swipe-card-details">
+                <div className="Swipe-card-name">
+                  <h3>{this.state.first.name}</h3>
                   <h4>{'@' + this.state.first.login}</h4>
-                  <div className="Swipe-card-details-icons">
-                    icons?
-                  </div>
+                </div>
+                <div className="Swipe-card-details">
+                  <table>
+                    <tr>
+                      <td><Icon type="globe-alt" font={false} /></td>
+                      <td>{this.state.first.location}</td>
+                    </tr>
+                  </table>
                 </div>
                 <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? '✓' : '×'}</div>
               </div>
@@ -244,11 +251,17 @@ var Swipe = module.exports = React.createClass({
               { (this.state.more.length > 0) &&
                 <div className="Swipe-card-next">
                   <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.more[0].avatar_url + ')'}}></div>
-                  <div className="Swipe-card-details">
+                  <div className="Swipe-card-name">
+                    <h3>{this.state.more[0].name}</h3>
                     <h4>{'@' + this.state.more[0].login}</h4>
-                    <div className="Swipe-card-details-icons">
-                      icons?
-                    </div>
+                  </div>
+                  <div className="Swipe-card-details">
+                    <table>
+                      <tr>
+                        <td><Icon type="globe-alt" font={false} /></td>
+                        <td>{this.state.more[0].location}</td>
+                      </tr>
+                    </table>
                   </div>
                 </div>
               }
