@@ -33,9 +33,15 @@ var Matches = module.exports = React.createClass({
   },
 
   render() {
+    var MatchStore = this.getFlux().store('MatchStore');
+
     return (
       <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} heading="Matches">
         <div className="Matches">
+          {MatchStore.isLoading &&
+            <h1>Loading...</h1>
+          }
+
           <ul className="Matches-users">
             {this.state.matches.map(function(match) {
               return (
