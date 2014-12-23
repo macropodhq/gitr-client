@@ -7,9 +7,12 @@ html, body, .App {
   overflow-x: hidden;
 }
 body {
-  font-family: 'Source Sans Pro', 'RobotoDraft', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
   color: $color-sharp-suit;
+}
+input, button {
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 html {
