@@ -12,8 +12,9 @@ var log = require('bows')('Landing View');
 
 require('./landing.scss');
 
-var imagePhone = require('!url?mimetype=image/png!../images/phone.png');
-var imageMacropodLogo = require('!url?mimetype=image/png!../images/macropod-logo.png');
+var imagePhone = require('../images/phone.png');
+var imageKeyboard = require('../images/keyboard.png');
+var imageMacropodLogo = require('../images/macropod-logo.png');
 
 var Landing = module.exports = React.createClass({
   displayName: 'Landing',

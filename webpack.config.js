@@ -4,7 +4,7 @@ var release = (process.env.NODE_ENV === 'production');
 
 var plugins = [
   new webpack.NormalModuleReplacementPlugin(/^react$/, 'react/addons'),
-  //new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+  new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
 ];
 
 var jsxLoader = ['jsx?harmony'];
@@ -29,7 +29,7 @@ var config = module.exports = {
   devtool: !release && 'inline-source-map',
   entry: {
     'app': './app',
-    //vendor: ['react/addons', 'react-router', 'bows', 'fluxxor', 'lodash'] //, 'lunr', 'moment', 'node-uuid', 'superagent', 'tcomb-validation', 'react-textarea-autosize', 'react-playground']
+    vendor: ['react/addons', 'react-router', 'bows', 'fluxxor', 'lodash'],
   },
   output: {
     path: __dirname + '/dist',
@@ -49,11 +49,11 @@ var config = module.exports = {
           'style-loader',
           'css-loader',
           'autoprefixer-loader',
-          'sass-loader?includePaths[]=./app/base/style,includePaths[]=./node_modules'
+          'sass-loader?includePaths[]=./app/base/style,includePaths[]=./node_modules',
         ],
       },
       { test: /\.css$/,   loader: 'style-loader!css-loader' },
-      { test: /\.png$/,   loader: 'url-loader' },
+      { test: /\.png$/,   loader: 'url-loader?limit=10000' },
       { test: /\.svg$/,   loader: 'raw-loader?' },
     ],
   },
