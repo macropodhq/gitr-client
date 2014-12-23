@@ -15,8 +15,9 @@ html, body {
   bottom: 50px;
   height: calc(100% - 50px);
   background-color: $color-grey-light;
-  background-image: radial-gradient(ellipse at center, $color-grey-light 30%, $color-grey-dark 100%);
-  background-size: 100%;
+
+  background-image: url(../images/texture.png), radial-gradient(ellipse at center, #646c7c 30%, #4e5766 100%);
+  background-size: 75px, 100%;
   overflow: hidden;
   &-content {
     position: relative;

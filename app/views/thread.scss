@@ -11,7 +11,10 @@ $color-thread-submit-button: $color-hastamayana;
 $input-height: 40px;
 
 .Thread {
-  height: 100%;
+  margin: 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(#000, .2);
+  background: $color-white;
 
   .Thread-messages {
     list-style: none;
