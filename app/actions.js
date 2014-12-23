@@ -173,6 +173,7 @@ module.exports = function createActions(baseUrl, pubnubKey) {
       if (!this.pubnub) {
         this.pubnub = PUBNUB.init({
           subscribe_key: pubnubKey,
+          ssl: true,
         });
 
         var self = this;
