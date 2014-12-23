@@ -35,9 +35,7 @@ var MessageStore = module.exports = Fluxxor.createStore({
 
     return Common.handleLoadComplete.call(this, {
       models: payload.model.messages.map(function(message) {
-        message.matchId = payload.model.person.id;
-
-        return message;
+        return _.extend({}, message, {matchId: payload.model.person.id});
       }),
     });
   },
