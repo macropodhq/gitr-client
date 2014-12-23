@@ -29,6 +29,7 @@ var Person = module.exports = React.createClass({
 
     return {
       person: PersonStore.get(this.getParams().id),
+      originalRepos: PersonStore.get(this.getParams().id) ? PersonStore.get(this.getParams().id).repos : []
     };
   },
 
@@ -85,6 +86,22 @@ var Person = module.exports = React.createClass({
     this.transitionTo('swipe');
   },
 
+  handleSwipeNav(index) {
+    var person = this.state.person;
+    var repos = this.state.originalRepos;
+    var firstHalf = repos.slice(0, index);
+    var lastHalf = repos.slice(index, repos.length);
+    repos = lastHalf.concat(firstHalf);
+    person.repos = repos;
+
+    this.setState({
+      person: person,
+      slide: {
+        currentIndex: index
+      }
+    })
+  },
+
   render() {
     var panes = Array.apply(null, Array(20)).map(function(_, i) {
       return React.DOM.div({key: i}, React.DOM.b(null, i))
@@ -119,7 +136,7 @@ var Person = module.exports = React.createClass({
           <div className="Detail-portfolio-pagination">
             {this.state.person.repos.map(function(repo, index) {
               return (
-                <span className={'Detail-portfolio-pagination-page' + (this.state.slide.currentIndex === index ? ' Detail-portfolio-pagination-page--active' : ' ')}></span>
+                <span onClick={this.handleSwipeNav.bind(null, index)} className={'Detail-portfolio-pagination-page' + (this.state.slide.currentIndex === index ? ' Detail-portfolio-pagination-page--active' : ' ')}></span>
               )
             }.bind(this))}
           </div>
