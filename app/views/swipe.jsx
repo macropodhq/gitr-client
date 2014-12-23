@@ -184,7 +184,7 @@ var Swipe = module.exports = React.createClass({
   },
 
   handleChoice(match) {
-    this.getFlux().actions.matchCreate({
+    this.getFlux().actions.matchCreate({}, {
       person: this.state.first,
       match: match,
     });
