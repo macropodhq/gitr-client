@@ -45,6 +45,12 @@ var Conversation = module.exports = React.createClass({
     this.getFlux().actions.matchFetch(this.getParams().id);
   },
 
+  componentDidUpdate() {
+    if (this.refs.messageContainer) {
+      this.refs.messageContainer.getDOMNode().scrollTop = this.refs.messageContainer.getDOMNode().scrollHeight;
+    }
+  },
+
   handleChange(ev) {
     ev.preventDefault();
     ev.stopPropagation();
@@ -89,7 +95,7 @@ var Conversation = module.exports = React.createClass({
 
     return (
       <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={'@' + this.state.match.login}>
-        <div className="ConversationScroller">
+        <div className="ConversationScroller" ref="messageContainer">
           <div className="Conversation">
             <ul className="Conversation-messages">
               {this.state.messages.map(function(message) {
