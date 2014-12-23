@@ -229,7 +229,8 @@ var Swipe = module.exports = React.createClass({
 
   render() {
     var style = {
-      'transform': 'rotate(' + this.getRotation() + 'deg) translate(' + this.getTranslation() + ')'
+      'transform': 'rotate(' + this.getRotation() + 'deg) translate(' + this.getTranslation() + ')',
+      '-webkit-transform': 'rotate(' + this.getRotation() + 'deg) translate(' + this.getTranslation() + ')',
     };
 
     var fill = 'black';
