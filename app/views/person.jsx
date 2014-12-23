@@ -8,6 +8,7 @@ var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var Router = require('react-router');
 var Wrapper = require('./wrapper');
 var Icon = require('../base/components/icon');
+var Spinner = require('react-spinner');
 
 var log = require('bows')('Person View');
 
@@ -81,7 +82,9 @@ var Person = module.exports = React.createClass({
 
     if (!this.state.person && PersonStore.isLoading) {
       return (
-        <h1>Loading...</h1>
+        <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={'loading'}>
+          <Spinner />
+        </Wrapper>
       );
     }
 
