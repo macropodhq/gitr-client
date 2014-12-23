@@ -193,6 +193,40 @@ var Swipe = module.exports = React.createClass({
     this.getFlux().store('SuggestionStore').shift();
   },
 
+  details(info) {
+    return (
+      <div className="Swipe-card-details">
+        {(info.bio && info.bio !== '') &&
+          <p>{info.bio}</p>
+        }
+        <ul>
+          {(info.company && info.company !== '') &&
+            <li>Works for <strong>{info.company}</strong></li>
+          }
+
+          {(info.location && info.location !== '') &&
+            <li>Lives in <strong>{info.location}</strong></li>
+          }
+
+          {(info.public_repos && info.public_repos > 0) &&
+            <li>Manages <strong>{info.public_repos}</strong> public repositories</li>
+          }
+
+          {(info.followers && info.followers > 0) &&
+            <li>Has <strong>{info.followers}</strong> followers</li>
+          }
+
+          {(info.following && info.following > 0) &&
+            <li>Is following <strong>{info.following}</strong> others</li>
+          }
+        </ul>
+      </div>
+    )
+
+
+    return row;
+  },
+
   render() {
     var style = {
       'transform': 'rotate(' + this.getRotation() + 'deg) translate(' + this.getTranslation() + ')'
@@ -243,14 +277,7 @@ var Swipe = module.exports = React.createClass({
                   <h3>{this.state.first.name}</h3>
                   <h4>{'@' + this.state.first.login}</h4>
                 </div>
-                <div className="Swipe-card-details">
-                  <table>
-                    <tr>
-                      <td><Icon type="globe-alt" font={false} /></td>
-                      <td>{this.state.first.location}</td>
-                    </tr>
-                  </table>
-                </div>
+                {this.details(this.state.first)}
                 <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? '✓' : '×'}</div>
               </div>
 
@@ -261,14 +288,7 @@ var Swipe = module.exports = React.createClass({
                     <h3>{this.state.more[0].name}</h3>
                     <h4>{'@' + this.state.more[0].login}</h4>
                   </div>
-                  <div className="Swipe-card-details">
-                    <table>
-                      <tr>
-                        <td><Icon type="globe-alt" font={false} /></td>
-                        <td>{this.state.more[0].location}</td>
-                      </tr>
-                    </table>
-                  </div>
+                  {this.details(this.state.more[0])}
                 </div>
               }
 
