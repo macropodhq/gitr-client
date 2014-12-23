@@ -29,7 +29,7 @@ $input-height: 40px;
   .Conversation-message {
     @extend %clearfix;
     clear: both;
-    max-width: 90%;
+    max-width: 80%;
     margin: 10px 0;
 
     img {
