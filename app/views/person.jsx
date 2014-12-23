@@ -9,6 +9,7 @@ var Router = require('react-router');
 var Wrapper = require('./wrapper');
 var Icon = require('../base/components/icon');
 var Spinner = require('react-spinner');
+var marked = require('react-marked');
 
 var log = require('bows')('Person View');
 
@@ -54,10 +55,15 @@ var Person = module.exports = React.createClass({
   },
 
   work(repo) {
+    var readme = repo.readme ? repo.readme : '';
+    var readmeMarked = marked(readme);
     return (
       <div className="Detail-work">
         <div className="Detail-work-inside">
           <h2>{repo.name}</h2>
+          { (repo.description && repo.description !== '') &&
+            <p className="Detail-work-description">{repo.description}</p>
+          }
           <div className="Detail-work-iconography">
             <div className="Detail-work-icon">
               {repo.language ? repo.language : 'Unknown'}
@@ -69,7 +75,11 @@ var Person = module.exports = React.createClass({
               <Icon type="share" font={false} /> {repo.forks}
             </div>
           </div>
-          <p>{repo.description}</p>
+          { readmeMarked !== '' &&
+            <div className="Detail-work-readme">
+              {readmeMarked}
+            </div>
+          }
         </div>
       </div>
     );
@@ -122,6 +132,8 @@ var Person = module.exports = React.createClass({
         <h1>Not found!</h1>
       );
     }
+
+    console.log(this.state.person)
 
     return (
       <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} showYesNo={true} heading={'@' + this.state.person.login} onNo={this.handleChoice.bind(null, false)} onYes={this.handleChoice.bind(null, true)}>

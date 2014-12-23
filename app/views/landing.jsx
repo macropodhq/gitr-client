@@ -49,6 +49,7 @@ var Landing = module.exports = React.createClass({
               </Router.Link>
             </div>
             <img src={imagePhone} className="Masthead-image" />
+            <img src={imageKeyboard} className="Masthead-decoration" />
           </div>
         </div>
         <div className="Footer">

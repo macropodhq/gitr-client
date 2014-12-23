@@ -31,19 +31,57 @@ $color-pagination-background: $color-hastamayana;
         background: $color-work-background;
         box-shadow: 0 1px 3px rgba(#000, .2);
         min-height: 80%;
+        max-height: calc(100% - 30px);
+        overflow-y: auto;
       }
 
       h2 {
         margin: 0;
         font-weight: normal;
-        border-bottom: 2px solid $color-work-heading-border;
-        padding-bottom: 10px;
+      }
+
+      .Detail-work-description {
+        margin: 5px 0 0 0;
+        padding: 0;
+        font-size: 13px;
+      }
+
+      .Detail-work-readme {
+        h1,h2,h3,h4,h5,h6 {
+          margin: 2em 0 1.3em 0;
+          border-bottom: 1px solid $color-work-heading-border;
+          padding-bottom: 5px;
+
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+        h1 {
+          font-size: 18px;
+          border-bottom: 2px solid $color-work-heading-border;
+        }
+        h2 {
+          font-size: 16px;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        h4 {
+          font-size: 12px;
+        }
+        h5 {
+          font-size: 10px;
+        }
+        padding: $app-base-padding;
       }
     }
 
     .Detail-work-iconography {
       @extend %clearfix;
       padding: 10px 0;
+      background: $color-retail-monkey;
+      margin-top: 12px;
+      color: $color-white;
 
       .Detail-work-icon {
         float: left;
@@ -59,6 +97,7 @@ $color-pagination-background: $color-hastamayana;
           svg {
             width: 13px;
             height: 16px;
+            fill: $color-white;
           }
         }
       }

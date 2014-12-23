@@ -64,6 +64,14 @@ html, body {
       background: rgba(#fff, .9);
     }
   }
+  &-decoration {
+    position: absolute;
+    bottom: -40%;
+    right: 50%;
+    height: 70%;
+    max-height: 410px;
+    transform: rotate(4deg);
+  }
   @media(max-width:650px) {
     &-content {
       text-align: center;
@@ -83,6 +91,9 @@ html, body {
       float: none;
       margin: 90px 0 0 30px;
       height: 550px;
+    }
+    &-decoration {
+      display: none;
     }
   }
 }
