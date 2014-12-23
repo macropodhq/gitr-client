@@ -278,7 +278,10 @@ var Swipe = module.exports = React.createClass({
                   <h4>{'@' + this.state.first.login}</h4>
                 </div>
                 {this.details(this.state.first)}
-                <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? <Icon type="check" font={false} /> : <Icon type="close" font={false} />}</div>
+                <div className={statusClass} style={statusStyle}>
+                  <Icon type="check" style={{display: this.getAcceptanceStatus() > 0 ? 'block' : 'none'}} font={false} />
+                  <Icon type="close" style={{display: this.getAcceptanceStatus() > 0 ? 'none' : 'block'}} font={false} />
+                </div>
               </div>
 
               { (this.state.more.length > 0) &&
