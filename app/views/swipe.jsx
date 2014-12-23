@@ -220,12 +220,19 @@ var Swipe = module.exports = React.createClass({
       'Swipe-status--yes': this.state.gesture.directionOrigin === 'right'
     });
 
-    console.log(this.state.first)
+    var SuggestionStore = this.getFlux().store('SuggestionStore');
 
     return (
       <Wrapper rightLink={{to: 'matches', iconType: 'bubbles'}}>
-        { (this.state.first === null) &&
-          <Spinner />
+        { (this.state.first === null && !SuggestionStore.isLoading) &&
+          <h1>There are no people left!</h1>
+        }
+
+        { (this.state.first === null && SuggestionStore.isLoading) &&
+          <div>
+            <h1>Looking for more people to talk to...</h1>
+            <Spinner />
+          </div>
         }
 
         { (this.state.first !== null) &&
