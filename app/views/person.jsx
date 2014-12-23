@@ -123,9 +123,6 @@ var Person = module.exports = React.createClass({
               }.bind(this))
             }
           </div>
-          <div className="Detail-bio">
-            <img src="https://avatars1.githubusercontent.com/u/479055" />
-          </div>
         </div>
       </Wrapper>
     );
