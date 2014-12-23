@@ -54,7 +54,7 @@ var Landing = module.exports = React.createClass({
         </div>
         <div className="Footer">
           <img src={imageMacropodLogo} className="Footer-logo" />
-          <a href="#">Macropod Software</a>
+          <a href="https://macropod.com/">Macropod Software</a>
         </div>
       </div>
     );
