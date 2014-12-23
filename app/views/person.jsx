@@ -21,6 +21,7 @@ var Person = module.exports = React.createClass({
     FluxMixin,
     StoreWatchMixin('PersonStore'),
     Router.State,
+    Router.Navigation
   ],
 
   getStateFromFlux() {
@@ -73,6 +74,17 @@ var Person = module.exports = React.createClass({
     );
   },
 
+  handleChoice(match) {
+    this.getFlux().actions.matchCreate({}, {
+      person: this.state.person,
+      match: match,
+    });
+
+    this.getFlux().store('SuggestionStore').shift();
+
+    this.transitionTo('swipe');
+  },
+
   render() {
     var panes = Array.apply(null, Array(20)).map(function(_, i) {
       return React.DOM.div({key: i}, React.DOM.b(null, i))
@@ -95,7 +107,7 @@ var Person = module.exports = React.createClass({
     }
 
     return (
-      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'matches', iconType: 'bubbles'}} heading={'@' + this.state.person.login}>
+      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} showYesNo={true} heading={'@' + this.state.person.login} onNo={this.handleChoice.bind(null, false)} onYes={this.handleChoice.bind(null, true)}>
         <div className="Detail">
           <Swipe className="Detail-portfolio" callback={this.handleSwipe}>
             {this.state.person.repos.map(function(repo) {

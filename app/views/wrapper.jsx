@@ -11,6 +11,13 @@ require('./app.scss');
 var Wrapper = module.exports = React.createClass({
   displayName: 'Wrapper',
 
+  getDefaultProps() {
+    return {
+      onNo: function() {},
+      onYes: function() {}
+    }
+  },
+
   getLeftButton() {
     if (this.props.leftLink) {
       return (
@@ -52,6 +59,12 @@ var Wrapper = module.exports = React.createClass({
             <h1>{this.props.heading || 'gitr'}</h1>
             <div className="App-nav-item App-nav-item--message">
               {this.getRightButton()}
+              { this.props.showYesNo &&
+                  <div>
+                    <Icon className="Icon-close" type="close" font={false} onClick={this.props.onNo}/>
+                    <Icon className="Icon-check" type="check" font={false} onClick={this.props.onYes}/>
+                  </div>
+              }
             </div>
           </nav>
         </header>

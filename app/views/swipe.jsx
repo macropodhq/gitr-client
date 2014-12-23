@@ -305,7 +305,7 @@ var Swipe = module.exports = React.createClass({
               <Router.Link className="Swipe-control Swipe-control--info" to="person" params={{id: this.state.first.id}}>
                 <Icon type="info" font={false} />
               </Router.Link>
-              <Icon type="check" font={false} className="Swipe-control Swipe-control--yes" onClick={this.handleChoice.bind(null, false)} />
+              <Icon type="check" font={false} className="Swipe-control Swipe-control--yes" onClick={this.handleChoice.bind(null, true)} />
             </div>
           </div>
         }
