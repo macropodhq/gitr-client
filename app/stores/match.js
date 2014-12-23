@@ -40,7 +40,13 @@ var MatchStore = module.exports = Fluxxor.createStore({
   handleLoadPending: Common.handleLoadPending,
   handleLoadComplete: Common.handleLoadComplete,
   handleGetPending: Common.handleGetPending,
-  handleGetComplete: Common.handleGetComplete,
+  handleGetComplete(payload) {
+    if (payload.error) {
+      return Common.handleGetComplete.call(this, payload);
+    }
+
+    return Common.handleGetComplete.call(this, {model: payload.model.person});
+  },
   handleCreatePending: Common.handleCreatePending,
   handleCreateComplete: Common.handleCreateComplete,
   handleCreateRemote: Common.handleCreateRemote,

@@ -65,14 +65,14 @@ var makeFetchOne = function(ctx, pendingEvent, completeEvent, urlTemplate) {
   };
 };
 
-var makeCreate = function(ctx, pendingEvent, completeEvent, urlTemplate, attributeValidation) {
+var makeCreate = function(ctx, pendingEvent, completeEvent, urlTemplate) {
   log('Generating create function', pendingEvent, completeEvent);
 
-  return function(attributes) {
+  return function(parameters, attributes) {
     var operationId = uuid.v1();
-    var id = attributes.id || uuid.v4();
 
-    attributes = _.extend({}, attributes, {id: id});
+    attributes = _.extend({}, attributes);
+    parameters = _.extend({}, parameters);
 
     this.dispatch(pendingEvent, {
       operationId: operationId,
@@ -80,7 +80,7 @@ var makeCreate = function(ctx, pendingEvent, completeEvent, urlTemplate, attribu
     });
 
     var self = this;
-    ctx.agent.post(urlTemplate.build({})).send(attributes).end(function(res) {
+    ctx.agent.post(urlTemplate.build(parameters)).send(attributes).end(function(res) {
       if (!res.ok) {
         return self.dispatch(completeEvent, {
           operationId: operationId,
@@ -96,7 +96,7 @@ var makeCreate = function(ctx, pendingEvent, completeEvent, urlTemplate, attribu
   };
 };
 
-var makeUpdate = function(ctx, pendingEvent, completeEvent, urlTemplate, attributeValidation) {
+var makeUpdate = function(ctx, pendingEvent, completeEvent, urlTemplate) {
   log('Generating update function', pendingEvent, completeEvent);
 
   return function(attributes) {
@@ -176,6 +176,7 @@ module.exports = function createActions(baseUrl) {
     matchCreate: makeCreate(ctx, constants.MATCH_CREATE_PENDING, constants.MATCH_CREATE_COMPLETE, new Houkou(baseUrl + '/v1/matches.json')),
     matchUpdate: makeUpdate(ctx, constants.MATCH_UPDATE_PENDING, constants.MATCH_UPDATE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
     matchDelete: makeDelete(ctx, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
+    messageCreate: makeCreate(ctx, constants.MESSAGE_CREATE_PENDING, constants.MESSAGE_CREATE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id/messages.json')),
 
     setJwt(jwt) {
       ctx.setJwt(jwt);

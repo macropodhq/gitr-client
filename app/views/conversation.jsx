@@ -18,71 +18,82 @@ var Conversation = module.exports = React.createClass({
 
   mixins: [
     FluxMixin,
-    StoreWatchMixin('PersonStore'),
+    StoreWatchMixin('MatchStore', 'MessageStore'),
     Router.State,
   ],
 
   getStateFromFlux() {
-    return {};
+    var MatchStore = this.getFlux().store('MatchStore');
+    var MessageStore = this.getFlux().store('MessageStore');
+
+    return {
+      match: MatchStore.get(this.getParams().id),
+      messages: MessageStore.getByMatchId(this.getParams().id),
+    };
+  },
+
+  getInitialState() {
+    return {
+      message: '',
+    };
+  },
+
+  componentDidMount() {
+    this.getFlux().actions.matchFetch(this.getParams().id);
+  },
+
+  handleChange(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    this.setState({
+      message: ev.target.value,
+    });
+  },
+
+  handleSubmit(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    this.getFlux().actions.messageCreate({id: this.state.match.id}, {text: this.state.message});
+
+    this.setState({
+      message: '',
+    });
   },
 
   render() {
+    if (!this.state.match) {
+      return <h1>Loading!</h1>
+    }
+
+    var self = this;
+
     return (
-      <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading="Conrad Pancake">
+      <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={'@' + this.state.match.login}>
         <div className="Conversation">
           <ul className="Conversation-messages">
-            <li className="Conversation-message Conversation-message--me">
-              <img src="https://avatars1.githubusercontent.com/u/479055" />
-              <span className="Conversation-message-copy">
-                <p>Hey</p>
-                <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
-              </span>
-            </li>
-            <li className="Conversation-message Conversation-message--them">
-              <img src="https://avatars0.githubusercontent.com/u/33324" />
-              <span className="Conversation-message-copy">
-                <p>Hey</p>
-                <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
-              </span>
-            </li>
+            {this.state.messages.map(function(message) {
+              var from = (message.from === self.state.match.id) ? "them" : "me";
 
-            <li className="Conversation-message Conversation-message--them">
-              <img src="https://avatars0.githubusercontent.com/u/33324" />
-              <span className="Conversation-message-copy">
-                <p>How are you doing?</p>
-                <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
-              </span>
-            </li>
-
-            <li className="Conversation-message Conversation-message--me">
-              <img src="https://avatars1.githubusercontent.com/u/479055" />
-              <span className="Conversation-message-copy">
-                <p>I would hear stories about Steve Jobs and feel like he was at 100 percent exactly what he wanted to do, but I`m sure even a Steve Jobs has compromised. Even a Rick Owens has compromised. You know, even a Kanye West has compromised. Sometimes you don`t even know when you`re being compromised till after the fact, and that`s what you regret.</p>
-                <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
-              </span>
-            </li>
-
-            <li className="Conversation-message Conversation-message--them">
-              <img src="https://avatars0.githubusercontent.com/u/33324" />
-              <span className="Conversation-message-copy">
-                <p>But for me to have the opportunity to stand in front of a bunch of executives and present myself, I had to hustle in my own way. I can`t tell you how frustrating it was that they didn`t get that. No joke - I`d leave meetings crying all the time.</p>
-                <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
-              </span>
-            </li>
-
-            <li className="Conversation-message Conversation-message--them">
-              <img src="https://avatars0.githubusercontent.com/u/33324" />
-              <span className="Conversation-message-copy">
-                <p>The concept of commercialism in the fashion and art world is looked down upon. You know, just to think, `What amount of creativity does it take to make something that masses of people like?` And, `How does creativity apply across the board?`</p>
-                <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
-              </span>
-            </li>
+              return (
+                <li className={'Conversation-message Conversation-message--' + from}>
+                  <img src="https://avatars1.githubusercontent.com/u/479055" />
+                  <span className="Conversation-message-copy">
+                    <p>{message.text}</p>
+                    <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
+                  </span>
+                </li>
+              );
+            })}
           </ul>
 
-          <div className="Conversation-add">
-            <input type="text" className="Conversation-input" placeholder="Send a message" />
-            <Icon className="Conversation-add-submit" type="nav-right" font={false}/>
-          </div>
+          <form onSubmit={this.handleSubmit}>
+            <div className="Conversation-add">
+              <input type="text" className="Conversation-input" placeholder="Send a message" value={this.state.message} onChange={this.handleChange} />
+              <Icon className="Conversation-add-submit" type="nav-right" font={false}/>
+            </div>
+          </form>
         </div>
       </Wrapper>
     );
