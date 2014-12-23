@@ -225,12 +225,11 @@ var Swipe = module.exports = React.createClass({
     return (
       <Wrapper rightLink={{to: 'matches', iconType: 'bubbles'}}>
         { (this.state.first === null && !SuggestionStore.isLoading) &&
-          <h1>There are no people left!</h1>
+          <div className="SwipeEmpty">No matches found</div>
         }
 
         { (this.state.first === null && SuggestionStore.isLoading) &&
-          <div>
-            <h1>Looking for more people to talk to...</h1>
+          <div className="Swipe">
             <Spinner />
           </div>
         }
@@ -271,6 +270,10 @@ var Swipe = module.exports = React.createClass({
                     </table>
                   </div>
                 </div>
+              }
+
+              { (this.state.more.length > 1) &&
+                <div className="Swipe-card-more"></div>
               }
             </div>
 

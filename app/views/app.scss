@@ -40,7 +40,8 @@ a, a:visited {
   height: calc(100% - #{$app-header-height});
   overflow-y: auto;
   background-color: $color-grey-light;
-  background-image: radial-gradient(ellipse at center, $color-grey-light 30%, $color-grey-dark 100%);
+  background-image: url(../images/texture.png), radial-gradient(ellipse at center, $color-grey-light 30%, $color-grey-dark 100%);
+  background-size: 75px, 100%;
 }
 
 header {

@@ -18,13 +18,13 @@ $color-no: $color-alizarin;
     position: relative;
     height: calc((100% - #{$app-header-height}) - 70px);
 
-    .Swipe-card, .Swipe-card-next, .Swipe-card-next:before {
+    .Swipe-card, .Swipe-card-next, .Swipe-card-more {
       background: $color-white;
       box-shadow: 0 1px 3px rgba(#000, .2);
       border-radius: 2px;
     }
 
-    .Swipe-card, .Swipe-card-next {
+    .Swipe-card, .Swipe-card-next, .Swipe-card-more {
       padding: $app-base-padding;
       position: relative;
       height: 100%;
@@ -66,7 +66,7 @@ $color-no: $color-alizarin;
     }
 
     .Swipe-card {
-      z-index: 1;
+      z-index: 3;
 
       .Swipe-status {
         position: absolute;
@@ -95,24 +95,21 @@ $color-no: $color-alizarin;
     }
 
     .Swipe-card-next {
+      z-index: 2;
       width: 98%;
       position: absolute;
-      top: 10px;
+      top: 5px;
       left: 1%;
-      background-color: transparentize($color-white, .3);
+      background-color: mix($color-white, $color-grey-light, 80);
+    }
 
-      &:before {
-        content: '';
-        background: $color-white;
-        border-top: none;
-        position: absolute;
-        width: 96%;
-        left: 2%;
-        height: 10px;
-        bottom: -10px;
-        border-radius: 0 0 2px 2px;
-        background-color: transparentize($color-white, .5);
-      }
+    .Swipe-card-more {
+      z-index: 1;
+      width: 96%;
+      position: absolute;
+      top: 10px;
+      left: 2%;
+      background-color: mix($color-white, $color-grey-light, 60);
     }
   }
 
