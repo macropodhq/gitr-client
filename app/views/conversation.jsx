@@ -84,22 +84,24 @@ var Conversation = module.exports = React.createClass({
 
     return (
       <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={'@' + this.state.match.login}>
-        <div className="Conversation">
-          <ul className="Conversation-messages">
-            {this.state.messages.map(function(message) {
-              var from = (message.from === self.state.match.id) ? "them" : "me";
+        <div className="ConversationScroller">
+          <div className="Conversation">
+            <ul className="Conversation-messages">
+              {this.state.messages.map(function(message) {
+                var from = (message.from === self.state.match.id) ? "them" : "me";
 
-              return (
-                <li className={'Conversation-message Conversation-message--' + from}>
-                  <img src={(from === "me" ? self.state.me : self.state.match).avatar_url} />
-                  <span className="Conversation-message-copy">
-                    <p>{message.text}</p>
-                    <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
+                return (
+                  <li className={'Conversation-message Conversation-message--' + from}>
+                    <img src={(from === "me" ? self.state.me : self.state.match).avatar_url} />
+                    <span className="Conversation-message-copy">
+                      <p>{message.text}</p>
+                      <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
           <form onSubmit={this.handleSubmit}>
             <div className="Conversation-add">
