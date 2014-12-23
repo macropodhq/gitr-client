@@ -24,10 +24,9 @@ var Person = module.exports = React.createClass({
 
   getStateFromFlux() {
     var SuggestionStore = this.getFlux().store('SuggestionStore');
+
     return {
-      name: SuggestionStore.get(this.getParams().id) ? SuggestionStore.get(this.getParams().id).name : 'User',
-      login: SuggestionStore.get(this.getParams().id) ? SuggestionStore.get(this.getParams().id).login : 'Gitr',
-      repos: SuggestionStore.get(this.getParams().id) ? SuggestionStore.get(this.getParams().id).repos : []
+      person: SuggestionStore.get(this.getParams().id),
     };
   },
 
@@ -37,6 +36,10 @@ var Person = module.exports = React.createClass({
         currentIndex: 0
       }
     }
+  },
+
+  componentDidMount() {
+    this.getFlux().actions.personFetch(this.getParams().id);
   },
 
   handleSwipe(index) {
@@ -74,24 +77,36 @@ var Person = module.exports = React.createClass({
       return React.DOM.div({key: i}, React.DOM.b(null, i))
     });
 
+    var SuggestionStore = this.getFlux().store('SuggestionStore');
+
+    if (!this.state.person && SuggestionStore.isLoading) {
+      return (
+        <h1>Loading...</h1>
+      );
+    }
+
+    if (!this.state.person && !SuggestionStore.isLoading) {
+      return (
+        <h1>Not found!</h1>
+      );
+    }
+
     return (
-      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'matches', iconType: 'bubbles'}} heading={'@' + this.state.login}>
+      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'matches', iconType: 'bubbles'}} heading={'@' + this.state.person.login}>
         <div className="Detail">
           <Swipe id="Detail-portfolio" callback={this.handleSwipe}>
-            { this.state.repos.map(function(repo) {
-                return (
-                  this.work(repo)
-                )
-              }.bind(this))
-            }
+            {this.state.person.repos.map(function(repo) {
+              return (
+                this.work(repo)
+              )
+            }.bind(this))}
           </Swipe>
           <div className="Detail-portfolio-pagination">
-            { this.state.repos.map(function(repo, index) {
-                return (
-                  <span className={'Detail-portfolio-pagination-page' + (this.state.slide.currentIndex === index ? ' Detail-portfolio-pagination-page--active' : ' ')}></span>
-                )
-              }.bind(this))
-            }
+            {this.state.person.repos.map(function(repo, index) {
+              return (
+                <span className={'Detail-portfolio-pagination-page' + (this.state.slide.currentIndex === index ? ' Detail-portfolio-pagination-page--active' : ' ')}></span>
+              )
+            }.bind(this))}
           </div>
         </div>
       </Wrapper>

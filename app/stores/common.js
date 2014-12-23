@@ -34,29 +34,29 @@ var Common = {
   },
 
   handleGetPending: function(payload) {
+    this.isLoading = true;
+
     var model = _.findWhere(this.models, {id: payload.id});
 
-    if (!model) {
-      return;
+    if (model) {
+      _.extend(model, {
+        isLoading: true,
+      });
     }
-
-    _.extend(model, {
-      isLoading: true,
-    });
 
     this.emit('change');
   },
 
   handleGetComplete: function(payload) {
+    this.isLoading = false;
+
     var model = _.findWhere(this.models, {id: payload.model.id});
 
     if (!model) {
-      this.models.push(model = {});
+      this.models.push(model = _.extend({}, payload.model));
     }
 
-    _.extend(model, payload.model, {
-      isLoading: false,
-    });
+    delete model.isLoading;
 
     this.emit('change');
   },
