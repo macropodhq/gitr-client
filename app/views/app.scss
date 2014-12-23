@@ -51,33 +51,41 @@ header {
   .App-nav {
     @extend %clearfix;
 
-    a, a:visted {
+    a {
       color: $color-grey-lighter;
+      display: inline-block;
+      height: $app-header-height;
+      width: $app-header-height;
+      text-align: center;
+      line-height: $app-header-height + 4px;
     }
 
     .Icon {
       height: $app-header-height;
-      padding: 16px 0;
-    }
-
-    svg {
-      height: 17px
-    }
-
-    path {
-      fill: $color-grey-lighter;
+      opacity: 1;
+      svg {
+        height: 17px
+      }
+      path {
+        fill: lighten($color-grey-lighter, 15);
+      }
+      &:hover {
+        path {
+          fill: $color-grey-lighter;
+        }
+      }
     }
 
     h1 {
       height: $app-header-height;
-      padding: 12px 0;
+      line-height: $app-header-height - 4px;
       width: 60%;
       font-weight: 600;
       font-size: 18px;
       margin: 0;
       float: left;
-      margin: 0;
       text-align: center;
+      text-transform: lowercase;
     }
 
     .App-nav-item {

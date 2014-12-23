@@ -31,7 +31,7 @@ var Detail = module.exports = React.createClass({
     })
 
     return (
-      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'messages', iconType: 'bubble'}} heading="Conrad">
+      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'messages', iconType: 'bubbles'}} heading="Conrad">
         <div className="Detail">
           <Swipe id="Detail-portfolio">
             <div className="Detail-work">
