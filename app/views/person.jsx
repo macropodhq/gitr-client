@@ -18,15 +18,15 @@ var Person = module.exports = React.createClass({
 
   mixins: [
     FluxMixin,
-    StoreWatchMixin('SuggestionStore'),
+    StoreWatchMixin('PersonStore'),
     Router.State,
   ],
 
   getStateFromFlux() {
-    var SuggestionStore = this.getFlux().store('SuggestionStore');
+    var PersonStore = this.getFlux().store('PersonStore');
 
     return {
-      person: SuggestionStore.get(this.getParams().id),
+      person: PersonStore.get(this.getParams().id),
     };
   },
 
@@ -77,15 +77,15 @@ var Person = module.exports = React.createClass({
       return React.DOM.div({key: i}, React.DOM.b(null, i))
     });
 
-    var SuggestionStore = this.getFlux().store('SuggestionStore');
+    var PersonStore = this.getFlux().store('PersonStore');
 
-    if (!this.state.person && SuggestionStore.isLoading) {
+    if (!this.state.person && PersonStore.isLoading) {
       return (
         <h1>Loading...</h1>
       );
     }
 
-    if (!this.state.person && !SuggestionStore.isLoading) {
+    if (!this.state.person && !PersonStore.isLoading) {
       return (
         <h1>Not found!</h1>
       );

@@ -20,9 +20,7 @@ var SuggestionStore = module.exports = Fluxxor.createStore({
 
     this.bindActions(
       constants.PERSON_LOAD_PENDING, this.handleLoadPending,
-      constants.PERSON_LOAD_COMPLETE, this.handleLoadComplete,
-      constants.PERSON_GET_PENDING, this.handleGetPending,
-      constants.PERSON_GET_COMPLETE, this.handleGetComplete
+      constants.PERSON_LOAD_COMPLETE, this.handleLoadComplete
     );
 
     log('INIT', this);
@@ -37,14 +35,6 @@ var SuggestionStore = module.exports = Fluxxor.createStore({
     }
 
     return Common.handleLoadComplete.call(this, payload);
-  },
-  handleGetPending: Common.handleGetPending,
-  handleGetComplete(payload) {
-    if (payload.error) {
-      return Common.handleGetComplete.call(this, payload);
-    }
-
-    return Common.handleGetComplete.call(this, {model: payload.model.person});
   },
   get: Common.get,
   getAll: Common.getAll,
