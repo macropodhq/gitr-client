@@ -7,7 +7,7 @@ var plugins = [
   //new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
 ];
 
-var jsxLoader = ['jsx'];
+var jsxLoader = ['jsx?harmony'];
 
 if (release)  {
   plugins.push(new webpack.DefinePlugin({
