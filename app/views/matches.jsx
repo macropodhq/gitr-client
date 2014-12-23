@@ -7,6 +7,7 @@ var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var Wrapper = require('./wrapper');
 var Icon = require('../base/components/icon');
+var Spinner = require('react-spinner');
 
 var log = require('bows')('Matches View');
 
@@ -35,13 +36,17 @@ var Matches = module.exports = React.createClass({
   render() {
     var MatchStore = this.getFlux().store('MatchStore');
 
+    if (MatchStore.isLoading) {
+      return (
+        <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={'loading'}>
+          <Spinner />
+        </Wrapper>
+      );
+    }
+
     return (
       <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} heading="Matches">
         <div className="Matches">
-          {MatchStore.isLoading &&
-            <h1>Loading...</h1>
-          }
-
           <ul className="Matches-users">
             {this.state.matches.map(function(match) {
               return (
