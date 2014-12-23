@@ -77,7 +77,7 @@ var Conversation = module.exports = React.createClass({
           <Spinner />
           <form onSubmit={this.handleSubmit}>
             <div className="Conversation-add">
-              <input type="text" className="Conversation-input" placeholder="Send a message" value={this.state.message} onChange={this.handleChange} />
+              <input type="text" className="Conversation-input" placeholder="Send a message" tabIndex="-1" value={this.state.message} onChange={this.handleChange} />
               <Icon className="Conversation-add-submit" type="nav-right" font={false}/>
             </div>
           </form>
@@ -108,10 +108,10 @@ var Conversation = module.exports = React.createClass({
             </ul>
           </div>
         </div>
-        
+
         <form onSubmit={this.handleSubmit}>
           <div className="Conversation-add">
-            <input type="text" className="Conversation-input" placeholder="Send a message" value={this.state.message} onChange={this.handleChange} />
+            <input type="text" className="Conversation-input" placeholder="Send a message" tabIndex="-1" value={this.state.message} onChange={this.handleChange} />
             <Icon className="Conversation-add-submit" type="nav-right" font={false}/>
           </div>
         </form>

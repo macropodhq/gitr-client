@@ -7,18 +7,30 @@ $color-work-heading-border: $color-hastamayana;
 $color-pagination-background: $color-hastamayana;
 
 .Detail {
-  padding: $app-base-padding;
-  margin: 10px;
+  padding: 0;
+  margin: 0;
+  height: 100%;
 
-  #Detail-portfolio {
+  .Detail-portfolio {
+    height: 100%;
+
+    & > div:first-child {
+      height: 100%;
+      & > div:first-child {
+        height: 100%;
+      }
+    }
+
     .Detail-work {
-      padding: 0 5px;
+      padding: 10px;
+      height: 100%;
 
       .Detail-work-inside {
         border-radius: 3px;
         padding: $app-base-padding/2;
         background: $color-work-background;
         box-shadow: 0 1px 3px rgba(#000, .2);
+        min-height: 80%;
       }
 
       h2 {
@@ -47,6 +59,10 @@ $color-pagination-background: $color-hastamayana;
   }
 
   .Detail-portfolio-pagination {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
     margin-top: 20px;
     text-align: center;
 

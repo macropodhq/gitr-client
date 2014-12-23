@@ -94,7 +94,7 @@ var Person = module.exports = React.createClass({
     return (
       <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'matches', iconType: 'bubbles'}} heading={'@' + this.state.person.login}>
         <div className="Detail">
-          <Swipe id="Detail-portfolio" callback={this.handleSwipe}>
+          <Swipe className="Detail-portfolio" callback={this.handleSwipe}>
             {this.state.person.repos.map(function(repo) {
               return (
                 this.work(repo)
