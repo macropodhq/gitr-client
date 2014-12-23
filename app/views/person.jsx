@@ -5,19 +5,21 @@ var Fluxxor = require('fluxxor');
 var Swipe = require('react-swipe/swipe');
 var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
+var Router = require('react-router');
 var Wrapper = require('./wrapper');
 var Icon = require('../base/components/icon');
 
-var log = require('bows')('Detail View');
+var log = require('bows')('Person View');
 
-require('./detail.scss');
+require('./person.scss');
 
-var Detail = module.exports = React.createClass({
-  displayName: 'Detail',
+var Person = module.exports = React.createClass({
+  displayName: 'Person',
 
   mixins: [
     FluxMixin,
     StoreWatchMixin('PersonStore'),
+    Router.State,
   ],
 
   getStateFromFlux() {
@@ -25,13 +27,12 @@ var Detail = module.exports = React.createClass({
   },
 
   render() {
-
     var panes = Array.apply(null, Array(20)).map(function(_, i) {
       return React.DOM.div({key: i}, React.DOM.b(null, i))
-    })
+    });
 
     return (
-      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'messages', iconType: 'bubbles'}} heading="Conrad">
+      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'matches', iconType: 'bubbles'}} heading="Conrad">
         <div className="Detail">
           <Swipe id="Detail-portfolio">
             <div className="Detail-work">

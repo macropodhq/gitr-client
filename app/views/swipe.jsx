@@ -218,7 +218,7 @@ var Swipe = module.exports = React.createClass({
     });
 
     return (
-      <Wrapper rightLink={{to: 'messages', iconType: 'bubbles'}}>
+      <Wrapper rightLink={{to: 'matches', iconType: 'bubbles'}}>
         { (this.state.first === null) &&
           <h1>LOADING PEOPLES</h1>
         }
@@ -252,7 +252,7 @@ var Swipe = module.exports = React.createClass({
 
             <div className="Swipe-controls">
               <div className="Swipe-control Swipe-control--no" onClick={this.handleChoice.bind(null, false)}>×</div>
-              <Router.Link className="Swipe-control Swipe-control--info" to="detail" params={{username: this.state.first.login, person: this.state.first}}>i</Router.Link>
+              <Router.Link className="Swipe-control Swipe-control--info" to="person" params={{name: this.state.first.login}}>i</Router.Link>
               <div className="Swipe-control Swipe-control--yes" onClick={this.handleChoice.bind(null, true)}>✓</div>
             </div>
           </div>
