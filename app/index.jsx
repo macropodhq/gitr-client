@@ -11,7 +11,7 @@ var createActions = require('./actions');
 var log = require('bows')('App');
 var logEvent = require('bows')('Events');
 
-var baseUrl = 'http://api.gitr.io';
+var baseUrl = 'https://api.gitr.io';
 
 var flux = new Fluxxor.Flux(createStores(), createActions(baseUrl));
 

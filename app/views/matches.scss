@@ -4,14 +4,14 @@
 
 $color-user-border: $color-grey-lightest;
 
-.Messages {
+.Matches {
   padding: $app-base-padding;
   margin: 10px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(#000, .2);
   background: $color-white;
 
-  .Messages-users {
+  .Matches-users {
     list-style: none;
     margin: 0;
     padding: 0;

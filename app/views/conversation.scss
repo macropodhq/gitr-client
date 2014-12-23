@@ -4,19 +4,19 @@
 
 $color-message-background: $color-white;
 $color-time: $color-hastamayana;
-$color-thread-input-background: $color-white;
-$color-thread-input-border: $color-retail-monkey;
-$color-thread-submit-button: $color-hastamayana;
+$color-conversation-input-background: $color-white;
+$color-conversation-input-border: $color-retail-monkey;
+$color-conversation-submit-button: $color-hastamayana;
 
 $input-height: 40px;
 
-.Thread {
+.Conversation {
   margin: 10px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(#000, .2);
   background: $color-white;
 
-  .Thread-messages {
+  .Conversation-messages {
     list-style: none;
     margin: 0;
     padding: $app-base-padding $app-base-padding 0 $app-base-padding;
@@ -25,7 +25,7 @@ $input-height: 40px;
     overflow: auto;
   }
 
-  .Thread-message {
+  .Conversation-message {
     @extend %clearfix;
     clear: both;
     max-width: 90%;
@@ -39,7 +39,7 @@ $input-height: 40px;
       margin-right: 4px;
     }
 
-    .Thread-message-copy {
+    .Conversation-message-copy {
       border-radius: 3px;
       float: left;
       display: block;
@@ -52,14 +52,14 @@ $input-height: 40px;
         margin: 0;
       }
 
-      .Thread-message-time {
+      .Conversation-message-time {
         font-size: 12px;
         color: $color-time;
       }
     }
   }
 
-  .Thread-message--me {
+  .Conversation-message--me {
     float: right;
 
     img {
@@ -69,14 +69,14 @@ $input-height: 40px;
     }
   }
 
-  .Thread-add {
+  .Conversation-add {
     position: relative;
 
-    .Thread-add-submit {
+    .Conversation-add-submit {
       position: absolute;
       right: 10px;
       top: 7px;
-      background: $color-thread-submit-button;
+      background: $color-conversation-submit-button;
       width: 30px;
       height: 30px;
       border-radius: 50%;
@@ -89,10 +89,10 @@ $input-height: 40px;
     }
   }
 
-  .Thread-input {
-    background: $color-thread-input-background;
+  .Conversation-input {
+    background: $color-conversation-input-background;
     border: 0;
-    border-top: 2px solid $color-thread-input-border;
+    border-top: 2px solid $color-conversation-input-border;
     height: $input-height;
     width: 100%;
     font-size: 14px;
