@@ -9,7 +9,6 @@ html, body, .App {
 body {
   font-family: 'Source Sans Pro', 'RobotoDraft', sans-serif;
   margin: 0;
-  font-weight: 300;
   color: $color-sharp-suit;
 }
 
@@ -23,7 +22,6 @@ html {
 
 h1 {
   font-size: 22px;
-  font-weight: 100;
 }
 
 a, a:visited {
@@ -43,10 +41,13 @@ a, a:visited {
 }
 
 header {
+  position: relative;
   background: $color-white;
   color: $color-grey-lighter;
   padding: 0 $app-base-padding / 2;
   height: $app-header-height;
+  box-shadow: 0 1px 3px rgba(#000, .2);
+  z-index: 2;
 
   .App-nav {
     @extend %clearfix;
@@ -62,17 +63,11 @@ header {
 
     .Icon {
       height: $app-header-height;
-      opacity: 1;
       svg {
         height: 17px
       }
       path {
-        fill: lighten($color-grey-lighter, 15);
-      }
-      &:hover {
-        path {
-          fill: $color-grey-lighter;
-        }
+        fill: $color-grey-lighter;
       }
     }
 

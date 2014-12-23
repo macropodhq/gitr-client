@@ -2,7 +2,6 @@
 @import "placeholders";
 @import "variables";
 
-$color-message-background: $color-white;
 $color-time: $color-hastamayana;
 $color-conversation-input-background: $color-white;
 $color-conversation-input-border: $color-retail-monkey;
@@ -10,12 +9,15 @@ $color-conversation-submit-button: $color-hastamayana;
 
 $input-height: 40px;
 
+.ConversationScroller {
+  height: calc(100% - #{$input-height});
+  overflow: auto;
+}
 .Conversation {
   margin: 10px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(#000, .2);
   background: $color-white;
-  height: calc(100% - 20px);
 
   .Conversation-messages {
     list-style: none;
@@ -29,7 +31,7 @@ $input-height: 40px;
   .Conversation-message {
     @extend %clearfix;
     clear: both;
-    max-width: 90%;
+    max-width: 80%;
     margin: 10px 0;
 
     img {
@@ -41,17 +43,17 @@ $input-height: 40px;
     }
 
     .Conversation-message-copy {
-      border-radius: 3px;
       float: left;
       display: block;
-      background: $color-message-background;
-      padding: 5px;
       max-width: calc(100% - 44px);
       min-width: 100px;
 
       p {
         padding: 0;
         margin: 0;
+        background: $color-grey-lightest;
+        padding: 10px 15px;
+        border-radius: 15px;
       }
 
       .Conversation-message-time {
@@ -63,41 +65,56 @@ $input-height: 40px;
 
   .Conversation-message--me {
     float: right;
+    text-align: right;
 
     img {
       float: right;
       margin-left: 4px;
       margin-right: 0;
     }
-  }
 
-  .Conversation-add {
-    position: relative;
-
-    .Conversation-add-submit {
-      position: absolute;
-      right: 10px;
-      top: 7px;
-      background: $color-conversation-submit-button;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      text-align: center;
-      padding-top: 6px;
-
-      path {
-        fill: $color-white;
+    .Conversation-message-copy {
+      p {
+        font-weight: 300;
+        background: $color-grey-light;
+        color: $color-white;
+        text-align: left;
       }
     }
   }
+}
+.Conversation-add {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 -1px 0 rgba(#000, .1);
 
-  .Conversation-input {
-    background: $color-conversation-input-background;
-    border: 0;
-    border-top: 2px solid $color-conversation-input-border;
-    height: $input-height;
-    width: 100%;
-    font-size: 14px;
-    padding: 0 50px 0 ($app-base-padding/2);
+  .Conversation-add-submit {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    background: $color-conversation-submit-button;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    text-align: center;
+    padding-top: 6px;
+
+    path {
+      fill: $color-white;
+    }
+  }
+}
+
+.Conversation-input {
+  background: $color-conversation-input-background;
+  border: 0;
+  height: $input-height;
+  width: 100%;
+  font-size: 14px;
+  padding: 0 50px 0 ($app-base-padding/2);
+  &:focus {
+    outline: 0;
   }
 }
