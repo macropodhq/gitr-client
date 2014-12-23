@@ -38,13 +38,13 @@ a, a:visited {
   clear: both;
   height: calc(100% - #{$app-header-height});
   overflow-y: auto;
-  background-color: #646c7c;
-  background-image: radial-gradient(ellipse at center, #646c7c 30%, #4e5766 100%);
+  background-color: $color-grey-light;
+  background-image: radial-gradient(ellipse at center, $color-grey-light 30%, $color-grey-dark 100%);
 }
 
 header {
   background: $color-white;
-  color: #a4a2b2;
+  color: $color-grey-lighter;
   padding: 0 $app-base-padding / 2;
   height: $app-header-height;
 
@@ -52,7 +52,7 @@ header {
     @extend %clearfix;
 
     a, a:visted {
-      color: #a4a2b2;
+      color: $color-grey-lighter;
     }
 
     .Icon {
@@ -65,7 +65,7 @@ header {
     }
 
     path {
-      fill: #a4a2b2;
+      fill: $color-grey-lighter;
     }
 
     h1 {

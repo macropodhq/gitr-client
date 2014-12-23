@@ -14,8 +14,8 @@ html, body {
   right: 0;
   bottom: 50px;
   height: calc(100% - 50px);
-  background-color: #646c7c;
-  background-image: radial-gradient(ellipse at center, #646c7c 30%, #4e5766 100%);
+  background-color: $color-grey-light;
+  background-image: radial-gradient(ellipse at center, $color-grey-light 30%, $color-grey-dark 100%);
   background-size: 100%;
   overflow: hidden;
   &-content {
@@ -58,7 +58,7 @@ html, body {
     height: 7.5vh;
     line-height: 7.5vh;
     font-size: 2.75vh;
-    color: #4e5766;
+    color: $color-grey-dark;
     box-shadow: 0 1px 0 rgba(#000, .2);
     &:hover {
       background: rgba(#fff, .9);
@@ -93,7 +93,7 @@ html, body {
   bottom: 0;
   padding: 15px 20px;
   font-size: .8em;
-  color: #a4a2b2;
+  color: $color-grey-lighter;
   vertical-align: middle;
   &-logo {
     height: 20px;

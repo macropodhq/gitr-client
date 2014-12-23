@@ -2,10 +2,14 @@
 @import "placeholders";
 @import "variables";
 
-$color-user-border: $color-hastamayana;
+$color-user-border: $color-grey-lightest;
 
 .Messages {
   padding: $app-base-padding;
+  margin: 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(#000, .2);
+  background: $color-white;
 
   .Messages-users {
     list-style: none;
@@ -13,14 +17,18 @@ $color-user-border: $color-hastamayana;
     padding: 0;
 
     h2 {
-      font-weight: 300;
-      margin: 0.6em 0;
+      font-weight: 400;
+      margin: 10px 0;
       font-size: 17px;
     }
 
     li {
       @extend %clearfix;
       border-bottom: 1px solid $color-user-border;
+
+      &:last-child {
+        border-bottom :0;
+      }
 
       a {
         padding: ($app-base-padding / 2) 0;
@@ -31,9 +39,16 @@ $color-user-border: $color-hastamayana;
       img {
         float: left;
         border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        margin-right: $app-base-padding;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+      .Icon {
+        float: right;
+        padding: 12px 0;
+      }
+      path {
+        fill: $color-grey-lighter;
       }
     }
   }
