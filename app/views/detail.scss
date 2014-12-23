@@ -1,1 +1,41 @@
-// from the window, to the
+@import "colors";
+@import "variables";
+@import "placeholders";
+
+$color-work-background: $color-white;
+$color-work-heading-border: $color-hastamayana;
+
+.Detail {
+  padding: $app-base-padding;
+
+  #Detail-portfolio {
+    .Detail-work {
+      border-radius: 3px;
+      padding: $app-base-padding/2;
+      background: $color-work-background;
+
+      h2 {
+        margin: 0;
+        font-weight: normal;
+        border-bottom: 2px solid $color-work-heading-border;
+        padding-bottom: 10px;
+      }
+    }
+
+    .Detail-work-iconography {
+      @extend %clearfix;
+      padding: 10px 0;
+
+      .Detail-work-icon {
+        float: left;
+        width: 33.33%;
+        text-align: center;
+
+        .Icon {
+          margin-right: 5px;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

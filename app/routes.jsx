@@ -18,7 +18,7 @@ module.exports = (
   <Route name="app" path="/" handler={AppView}>
     <DefaultRoute name="swipe" handler={SwipeView} />
     <Route name="messages" path="/messages" handler={MessagesView} />
-    <Route name="detail" path="/detail" handler={DetailView} />
+    <Route name="detail" path="/detail/:username" handler={DetailView} />
     <Route name="thread" path="/messages/thread/:userId" handler={ThreadView} />
   </Route>
 );

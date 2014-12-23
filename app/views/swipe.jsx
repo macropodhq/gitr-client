@@ -223,7 +223,7 @@ var Swipe = module.exports = React.createClass({
           <h1>LOADING PEOPLES</h1>
         }
 
-        { (this.state.first !== null) && 
+        { (this.state.first !== null) &&
           <div className="Swipe">
             <div className="Swipe-cards">
               <div className="Swipe-card" style={style} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>
@@ -252,7 +252,7 @@ var Swipe = module.exports = React.createClass({
 
             <div className="Swipe-controls">
               <div className="Swipe-control Swipe-control--no" onClick={this.handleChoice.bind(null, false)}>×</div>
-              <Router.Link className="Swipe-control Swipe-control--info" to="detail">i</Router.Link>
+              <Router.Link className="Swipe-control Swipe-control--info" to="detail" params={{username: this.state.first.login, person: this.state.first}}>i</Router.Link>
               <div className="Swipe-control Swipe-control--yes" onClick={this.handleChoice.bind(null, true)}>✓</div>
             </div>
           </div>
