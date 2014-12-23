@@ -25,7 +25,9 @@ var Person = module.exports = React.createClass({
   getStateFromFlux() {
     var SuggestionStore = this.getFlux().store('SuggestionStore');
     return {
-      repos: SuggestionStore.get(this.getParams().id).repos
+      name: SuggestionStore.get(this.getParams().id) ? SuggestionStore.get(this.getParams().id).name : 'User',
+      login: SuggestionStore.get(this.getParams().id) ? SuggestionStore.get(this.getParams().id).login : 'Gitr',
+      repos: SuggestionStore.get(this.getParams().id) ? SuggestionStore.get(this.getParams().id).repos : []
     };
   },
 
@@ -46,7 +48,6 @@ var Person = module.exports = React.createClass({
   },
 
   work(repo) {
-    console.log(repo)
     return (
       <div className="Detail-work">
         <div className="Detail-work-inside">
@@ -71,7 +72,7 @@ var Person = module.exports = React.createClass({
     });
 
     return (
-      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'matches', iconType: 'bubbles'}} heading="Conrad">
+      <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} rightLink={{to: 'matches', iconType: 'bubbles'}} heading={'@' + this.state.login}>
         <div className="Detail">
           <Swipe id="Detail-portfolio" callback={this.handleSwipe}>
             { this.state.repos.map(function(repo) {
