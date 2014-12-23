@@ -77,17 +77,16 @@ $color-no: $color-alizarin;
       @extend %clearfix;
 
       .Swipe-status {
+        svg {
+          background: $color-control-background;
+          border-radius: 50%;
+        }
+
         position: absolute;
         top: 20px;
         left: 20px;
-        width: 35px;
-        height: 35px;
-        font-size: 22px;
-        background: $color-control-background;
-        border: 5px solid $color-control-border;
+        font-size: 40px;
         z-index: 2;
-        text-align: center;
-        border-radius: 50%;
         opacity: 0;
       }
 

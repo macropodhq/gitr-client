@@ -232,19 +232,19 @@ var Swipe = module.exports = React.createClass({
       'transform': 'rotate(' + this.getRotation() + 'deg) translate(' + this.getTranslation() + ')'
     };
 
-    var color = 'black';
+    var fill = 'black';
 
     if (this.getAcceptanceStatus() > 1) {
-      color = 'green';
+      fill = 'rgb(46, 204, 113)';
     }
 
     if (this.getAcceptanceStatus() < -1) {
-      color = 'red';
+      fill = 'rgb(231, 76, 60)';
     }
 
     var statusStyle = {
       'opacity': this.state.gesture.directionOrigin === 'right' ? this.getAcceptanceStatus() : this.getAcceptanceStatus() * -1,
-      'color': color
+      'fill': fill
     }
 
     var cx = React.addons.classSet;
@@ -278,7 +278,7 @@ var Swipe = module.exports = React.createClass({
                   <h4>{'@' + this.state.first.login}</h4>
                 </div>
                 {this.details(this.state.first)}
-                <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? '✓' : '×'}</div>
+                <div className={statusClass} style={statusStyle}>{this.getAcceptanceStatus() > 0 ? <Icon type="check" font={false} /> : <Icon type="close" font={false} />}</div>
               </div>
 
               { (this.state.more.length > 0) &&
