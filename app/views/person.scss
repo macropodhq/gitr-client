@@ -55,6 +55,11 @@ $color-pagination-background: $color-hastamayana;
           font-size: 13px;
           width: 13px;
           height: 16px;
+
+          svg {
+            width: 13px;
+            height: 16px;
+          }
         }
       }
     }
