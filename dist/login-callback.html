@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Logging in...</title>
+	</head>
+	<body>
+		<script>
+var token = window.location.toString().replace(/.+token=/, '');
+window.opener.postMessage({token: token}, window.location);
+window.close();
+		</script>
+	</body>
+</html>
