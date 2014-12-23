@@ -25,30 +25,43 @@ $color-no: $color-alizarin;
     }
 
     .Swipe-card, .Swipe-card-next {
-      padding: 5px;
+      padding: $app-base-padding;
       position: relative;
       height: 100%;
 
+      h3 {
+        font-size: 22px;
+        margin: 0;
+        font-weight: normal;
+      }
+
       h4 {
+        font-size: 14px;
         margin: 0 auto;
         font-weight: normal;
         float: left;
       }
 
-      .Swipe-card-details {
-        padding: ($app-base-padding/2) 0px;
+      .Swipe-card-name {
+        padding: 8px 0px;
+        float: right;
+        width: calc(100% - 80px);
         @extend %clearfix;
-
-        .Swipe-card-details-icons {
-          float: right;
-        }
       }
 
       .Swipe-card-image {
-        max-width: 100%;
+        width: 60px;
+        height: 60px;
         background-size: cover;
-        border-radius: 1px;
-        height: calc(100% - 46px);
+        border-radius: 50%;
+        float: left;
+        //height: calc(100% - 46px);
+      }
+
+      .Swipe-card-details {
+        float: left;
+        width: 100%;
+        margin-top: 20px;
       }
     }
 
