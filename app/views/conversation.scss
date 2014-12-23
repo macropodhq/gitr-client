@@ -47,6 +47,7 @@ $input-height: 40px;
       background: $color-message-background;
       padding: 5px;
       max-width: calc(100% - 44px);
+      min-width: 100px;
 
       p {
         padding: 0;
