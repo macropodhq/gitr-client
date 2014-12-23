@@ -186,6 +186,7 @@ module.exports = function createActions(baseUrl, pubnubKey) {
                 model: {
                   id: incoming.id,
                   created_at: incoming.created_at,
+                  matchId: incoming.from,
                   from: incoming.from,
                   text: incoming.text,
                 },
