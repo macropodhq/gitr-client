@@ -11,7 +11,8 @@ $input-height: 40px;
 
 .ConversationScroller {
   height: calc(100% - #{$input-height});
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .Conversation {
   margin: 10px;

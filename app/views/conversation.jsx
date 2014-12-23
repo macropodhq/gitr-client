@@ -107,14 +107,14 @@ var Conversation = module.exports = React.createClass({
               })}
             </ul>
           </div>
-
-          <form onSubmit={this.handleSubmit}>
-            <div className="Conversation-add">
-              <input type="text" className="Conversation-input" placeholder="Send a message" value={this.state.message} onChange={this.handleChange} />
-              <Icon className="Conversation-add-submit" type="nav-right" font={false}/>
-            </div>
-          </form>
         </div>
+        
+        <form onSubmit={this.handleSubmit}>
+          <div className="Conversation-add">
+            <input type="text" className="Conversation-input" placeholder="Send a message" value={this.state.message} onChange={this.handleChange} />
+            <Icon className="Conversation-add-submit" type="nav-right" font={false}/>
+          </div>
+        </form>
       </Wrapper>
     );
   }
