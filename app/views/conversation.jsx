@@ -106,7 +106,7 @@ var Conversation = module.exports = React.createClass({
                     <img src={(from === "me" ? self.state.me : self.state.match).avatar_url} />
                     <span className="Conversation-message-copy">
                       <p>{message.text}</p>
-                      <span className="Conversation-message-time">{moment().format('ddd h:mma')}</span>
+                      <span className="Conversation-message-time">{moment(message.created_at).format('ddd h:mma')}</span>
                     </span>
                   </li>
                 );
