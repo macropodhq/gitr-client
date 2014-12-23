@@ -6,10 +6,12 @@ var Fluxxor = require('fluxxor');
 var FluxMixin = Fluxxor.FluxMixin(React);
 var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var Wrapper = require('./wrapper');
+var Spinner = require('react-spinner');
 
 var log = require('bows')('Swipe View');
 
 require('./swipe.scss');
+require('react-spinner/react-spinner.css');
 
 var Swipe = module.exports = React.createClass({
   displayName: 'Swipe',
@@ -220,7 +222,7 @@ var Swipe = module.exports = React.createClass({
     return (
       <Wrapper rightLink={{to: 'matches', iconType: 'bubbles'}}>
         { (this.state.first === null) &&
-          <h1>LOADING PEOPLES</h1>
+          <Spinner />
         }
 
         { (this.state.first !== null) &&
