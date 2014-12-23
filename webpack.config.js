@@ -4,7 +4,6 @@ var release = (process.env.NODE_ENV === 'production');
 
 var plugins = [
   new webpack.NormalModuleReplacementPlugin(/^react$/, 'react/addons'),
-  new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
 ];
 
 var jsxLoader = ['jsx?harmony'];
@@ -17,6 +16,7 @@ if (release)  {
     },
   }));
 
+  plugins.push(new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'));
   plugins.push(new webpack.optimize.DedupePlugin());
   plugins.push(new webpack.optimize.UglifyJsPlugin());
 } else {
