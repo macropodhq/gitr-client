@@ -57,7 +57,12 @@ var Conversation = module.exports = React.createClass({
     ev.preventDefault();
     ev.stopPropagation();
 
-    this.getFlux().actions.messageCreate({id: this.state.match.id}, {text: this.state.message});
+    var attributes = {
+      text: this.state.message,
+      matchId: this.state.match.id,
+    };
+
+    this.getFlux().actions.messageCreate({id: this.state.match.id}, attributes);
 
     this.setState({
       message: '',

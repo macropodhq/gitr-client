@@ -26,8 +26,6 @@ var MatchStore = module.exports = Fluxxor.createStore({
       constants.MATCH_CREATE_PENDING, this.handleCreatePending,
       constants.MATCH_CREATE_COMPLETE, this.handleCreateComplete,
       constants.MATCH_CREATE_REMOTE, this.handleCreateRemote,
-      constants.MATCH_UPDATE_PENDING, this.handleUpdatePending,
-      constants.MATCH_UPDATE_COMPLETE, this.handleUpdateComplete,
       constants.MATCH_UPDATE_REMOTE, this.handleUpdateRemote,
       constants.MATCH_DELETE_PENDING, this.handleDeletePending,
       constants.MATCH_DELETE_COMPLETE, this.handleDeleteComplete,

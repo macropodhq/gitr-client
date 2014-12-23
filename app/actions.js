@@ -174,7 +174,6 @@ module.exports = function createActions(baseUrl) {
     matchesFetch: makeFetchMultiple(ctx, constants.MATCH_LOAD_PENDING, constants.MATCH_LOAD_COMPLETE, 'matches', new Houkou(baseUrl + '/v1/matches.json')),
     matchFetch: makeFetchOne(ctx, constants.MATCH_GET_PENDING, constants.MATCH_GET_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
     matchCreate: makeCreate(ctx, constants.MATCH_CREATE_PENDING, constants.MATCH_CREATE_COMPLETE, new Houkou(baseUrl + '/v1/matches.json')),
-    matchUpdate: makeUpdate(ctx, constants.MATCH_UPDATE_PENDING, constants.MATCH_UPDATE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
     matchDelete: makeDelete(ctx, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
     messageCreate: makeCreate(ctx, constants.MESSAGE_CREATE_PENDING, constants.MESSAGE_CREATE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id/messages.json')),
 
