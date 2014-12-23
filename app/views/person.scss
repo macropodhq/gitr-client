@@ -47,6 +47,12 @@ $color-pagination-background: $color-hastamayana;
       }
 
       .Detail-work-readme {
+        padding: $app-base-padding;
+
+        img {
+          width: 100%;
+        }
+
         h1,h2,h3,h4,h5,h6 {
           margin: 2em 0 1.3em 0;
           border-bottom: 1px solid $color-work-heading-border;
@@ -72,7 +78,6 @@ $color-pagination-background: $color-hastamayana;
         h5 {
           font-size: 10px;
         }
-        padding: $app-base-padding;
       }
     }
 
