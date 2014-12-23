@@ -1,12 +1,10 @@
 'use strict';
 
-var _ = require('lodash');
 var Fluxxor = require('fluxxor');
 
 var log = require('bows')('Login Store');
 
 var constants = require('../action-constants');
-var Common = require('./common');
 
 var LoginStore = module.exports = Fluxxor.createStore({
   initialize() {
@@ -16,14 +14,6 @@ var LoginStore = module.exports = Fluxxor.createStore({
 
     this.jwt = null;
     this.profile = null;
-
-    try {
-      this.jwt = JSON.parse(window.localStorage.getItem("jwt"));
-      this.profile = JSON.parse(window.localStorage.getItem("profile"));
-    } catch (e) {
-      this.jwt = null;
-      this.profile = null;
-    }
 
     this.bindActions(
       constants.LOGIN_PENDING, this.handleLoginPending,
@@ -46,7 +36,7 @@ var LoginStore = module.exports = Fluxxor.createStore({
   },
 
   handleLoginComplete(payload) {
-    log("login complete")
+    log("login complete");
 
     this.isLoading = false;
 
@@ -56,7 +46,7 @@ var LoginStore = module.exports = Fluxxor.createStore({
       this.jwt = payload.jwt;
       this.profile = payload.profile;
 
-      window.localStorage.setItem("jwt", JSON.stringify(this.jwt));
+      window.localStorage.setItem("jwt", this.jwt);
       window.localStorage.setItem("profile", JSON.stringify(this.profile));
     }
 

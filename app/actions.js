@@ -5,6 +5,7 @@ var agent = require('superagent');
 var defaults = require('superagent-defaults');
 var uuid = require('uuid');
 var Houkou = require('houkou');
+var DecodeJWT = require('jwt-decode');
 
 var log = require('bows')('Actions');
 
@@ -155,15 +156,56 @@ var makeDelete = function(ctx, pendingEvent, completeEvent, urlTemplate) {
   };
 };
 
-module.exports = function createActions(baseUrl) {
+module.exports = function createActions(baseUrl, pubnubKey) {
   var ctx = {
     agent: agent,
     jwt: null,
+    pubnub: null,
 
     setJwt(jwt) {
       if (!this.jwt) {
         this.jwt = jwt;
         this.agent = defaults().set('authorization', 'Bearer ' + jwt);
+      }
+    },
+
+    connectPubnub(channel, actions) {
+      if (!this.pubnub) {
+        this.pubnub = PUBNUB.init({
+          subscribe_key: pubnubKey,
+        });
+
+        var self = this;
+
+        this.pubnub.subscribe({
+          channel: channel,
+          message(incoming, env, channel) {
+            console.log(incoming);
+
+            if (incoming.type === "message") {
+              actions.dispatch(constants.MESSAGE_CREATE_REMOTE, {
+                model: {
+                  id: incoming.id,
+                  created_at: incoming.created_at,
+                  from: incoming.from,
+                  text: incoming.text,
+                },
+              });
+            }
+
+            if (incoming.type === "match") {
+              self.agent.get(baseUrl + '/v1/matches/' + incoming.other_user_id + '.json').end(function(res) {
+                if (!res.ok || !res.body || !res.body.person) {
+                  return;
+                }
+
+                return actions.dispatch(constants.MATCH_CREATE_REMOTE, {
+                  model: res.body.person,
+                });
+              });
+            }
+          },
+        });
       }
     },
   };
@@ -177,11 +219,30 @@ module.exports = function createActions(baseUrl) {
     matchDelete: makeDelete(ctx, constants.MATCH_DELETE_PENDING, constants.MATCH_DELETE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id.json')),
     messageCreate: makeCreate(ctx, constants.MESSAGE_CREATE_PENDING, constants.MESSAGE_CREATE_COMPLETE, new Houkou(baseUrl + '/v1/matches/:id/messages.json')),
 
-    setJwt(jwt) {
+    init() {
+      try {
+        var jwt = window.localStorage.getItem("jwt");
+        var profile = JSON.parse(window.localStorage.getItem("profile"));
+
+        var decoded = DecodeJWT(jwt);
+      } catch (e) { return; }
+
+      if (decoded.exp*1000 <= Date.now()) {
+        return;
+      }
+
+      console.log(jwt);
+
       ctx.setJwt(jwt);
+      ctx.connectPubnub(profile.channel, this);
+
+      this.dispatch(constants.LOGIN_COMPLETE, {
+        jwt: jwt,
+        profile: profile,
+      });
     },
 
-    login: function() {
+    login() {
       var operationId = uuid.v1();
 
       this.dispatch(constants.LOGIN_PENDING, {
@@ -213,10 +274,14 @@ module.exports = function createActions(baseUrl) {
             });
           }
 
+          var profile = res.body.person;
+
+          ctx.connectPubnub(profile.channel, self);
+
           return self.dispatch(constants.LOGIN_COMPLETE, {
             operationId: operationId,
-            profile: res.body.person,
             jwt: token,
+            profile: profile,
           });
         });
       };

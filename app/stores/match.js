@@ -15,7 +15,6 @@ var MatchStore = module.exports = Fluxxor.createStore({
     this.isLoading = false;
     this.error = null;
     this.createCompleteWaiting = [];
-    this.updateCompleteWaiting = [];
     this.deleteCompleteWaiting = [];
 
     this.bindActions(
@@ -45,11 +44,6 @@ var MatchStore = module.exports = Fluxxor.createStore({
 
     return Common.handleGetComplete.call(this, {model: payload.model.person});
   },
-  handleCreatePending: Common.handleCreatePending,
-  handleCreateComplete: Common.handleCreateComplete,
-  handleCreateRemote: Common.handleCreateRemote,
-  handleUpdatePending: Common.handleUpdatePending,
-  handleUpdateComplete: Common.handleUpdateComplete,
   handleUpdateRemote: Common.handleUpdateRemote,
   handleDeletePending: Common.handleDeletePending,
   handleDeleteComplete: Common.handleDeleteComplete,
@@ -58,4 +52,44 @@ var MatchStore = module.exports = Fluxxor.createStore({
   getBy: Common.getBy,
   getAll: Common.getAll,
   getState: Common.getState,
+
+  handleCreatePending(payload) {
+    var model = _.extend({}, payload.attributes.person);
+
+    this.createCompleteWaiting.push({
+      operationId: payload.operationId,
+      model: model,
+    });
+  },
+
+  handleCreateComplete(payload) {
+    var waiting = _.findWhere(this.createCompleteWaiting, {
+      operationId: payload.operationId,
+    });
+
+    if (!waiting) {
+      return;
+    }
+
+    this.createCompleteWaiting.splice(this.createCompleteWaiting.indexOf(waiting), 1);
+
+    if (payload.model && payload.model.status === "Matched with other user") {
+      alert('You and ' + waiting.model.login + ' are a match!');
+
+      this.models.push(waiting.model);
+      this.emit('change');
+    }
+  },
+
+  handleCreateRemote(payload) {
+    var model = _.findWhere(this.models, {id: payload.model.id});
+
+    if (!model) {
+      this.models.push(model = {});
+    }
+
+    _.extend(model, payload.model);
+
+    this.emit('change');
+  },
 });

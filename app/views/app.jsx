@@ -34,8 +34,6 @@ var App = module.exports = React.createClass({
       return (
         <Landing />
       );
-    } else {
-      this.getFlux().actions.setJwt(this.state.jwt);
     }
 
     return (
