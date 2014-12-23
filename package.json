@@ -14,7 +14,8 @@
     "superagent-defaults": "macropodhq/superagent-defaults",
     "uuid": "^2.0.1",
     "react-swipe": "^1.0.2",
-    "moment": "^2.8.4"
+    "moment": "^2.8.4",
+    "react-swipe": "^1.0.2"
   },
   "devDependencies": {
     "autoprefixer-loader": "^1.0.0",
