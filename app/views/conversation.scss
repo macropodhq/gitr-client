@@ -11,7 +11,7 @@ $color-conversation-submit-button: $color-hastamayana;
 $input-height: 40px;
 
 .Conversation {
-  margin: 10px;
+  margin: 10px 10px (20px + $input-height);
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(#000, .2);
   background: $color-white;
@@ -69,34 +69,34 @@ $input-height: 40px;
       margin-right: 0;
     }
   }
+}
+.Conversation-add {
+  position: absolute;
+  bottom: 10px;
+  margin: 0 10px;
 
-  .Conversation-add {
-    position: relative;
+  .Conversation-add-submit {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    background: $color-conversation-submit-button;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 6px;
 
-    .Conversation-add-submit {
-      position: absolute;
-      right: 10px;
-      top: 7px;
-      background: $color-conversation-submit-button;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      text-align: center;
-      padding-top: 6px;
-
-      path {
-        fill: $color-white;
-      }
+    path {
+      fill: $color-white;
     }
   }
+}
 
-  .Conversation-input {
-    background: $color-conversation-input-background;
-    border: 0;
-    border-top: 2px solid $color-conversation-input-border;
-    height: $input-height;
-    width: 100%;
-    font-size: 14px;
-    padding: 0 50px 0 ($app-base-padding/2);
-  }
+.Conversation-input {
+  background: $color-conversation-input-background;
+  border: 0;
+  height: $input-height;
+  width: 100%;
+  font-size: 14px;
+  padding: 0 50px 0 ($app-base-padding/2);
 }

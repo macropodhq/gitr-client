@@ -68,6 +68,12 @@ var Conversation = module.exports = React.createClass({
       return (
         <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={'loading'}>
           <Spinner />
+          <form onSubmit={this.handleSubmit}>
+            <div className="Conversation-add">
+              <input type="text" className="Conversation-input" placeholder="Send a message" value={this.state.message} onChange={this.handleChange} />
+              <Icon className="Conversation-add-submit" type="nav-right" font={false}/>
+            </div>
+          </form>
         </Wrapper>
       )
     }
