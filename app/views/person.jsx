@@ -54,6 +54,9 @@ var Person = module.exports = React.createClass({
           <h2>{repo.name}</h2>
           <div className="Detail-work-iconography">
             <div className="Detail-work-icon">
+              {repo.language ? repo.language : 'Unknown'}
+            </div>
+            <div className="Detail-work-icon">
               <Icon type="eye" font={false} /> {repo.watchers}
             </div>
             <div className="Detail-work-icon">
