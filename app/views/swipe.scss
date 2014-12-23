@@ -16,7 +16,9 @@ $color-no: $color-alizarin;
     max-width: 300px;
     margin: 0 auto;
     position: relative;
-    height: calc((100% - #{$app-header-height}) - 70px);
+    //height: calc((100% - #{$app-header-height}) - 70px);
+    height: 300px;
+    @extend %clearfix;
 
     .Swipe-card, .Swipe-card-next, .Swipe-card-more {
       background: $color-white;
@@ -62,11 +64,17 @@ $color-no: $color-alizarin;
         float: left;
         width: 100%;
         margin-top: 20px;
+
+        ul {
+          margin: 0 0 0 20px;
+          padding: 0;
+        }
       }
     }
 
     .Swipe-card {
       z-index: 3;
+      @extend %clearfix;
 
       .Swipe-status {
         position: absolute;
