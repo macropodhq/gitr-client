@@ -32,7 +32,7 @@ var Landing = module.exports = React.createClass({
   },
 
   handleLoginClick() {
-    this.getFlux().actions.login(this.props.githubClientToken);
+    this.getFlux().actions.login();
   },
 
   render() {

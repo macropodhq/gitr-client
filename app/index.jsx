@@ -11,8 +11,7 @@ var createActions = require('./actions');
 var log = require('bows')('App');
 var logEvent = require('bows')('Events');
 
-var baseUrl = 'http://api.gitr.io/v1';
-var githubClientToken = '6fb60d94f985f1522e10';
+var baseUrl = 'http://api.gitr.io';
 
 var flux = new Fluxxor.Flux(createStores(), createActions(baseUrl));
 
@@ -23,5 +22,5 @@ flux.on('dispatch', function(name, payload) {
 Router.run(routes, (Handler, state) => {
   log('route change', state);
 
-  React.render(<Handler flux={flux} githubClientToken={githubClientToken} />, document.body);
+  React.render(<Handler flux={flux} />, document.body);
 });

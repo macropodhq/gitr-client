@@ -5,8 +5,8 @@
 	</head>
 	<body>
 		<script>
-var code = window.location.toString().replace(/.+code=/, '');
-window.opener.postMessage({code: code}, window.location);
+var token = window.location.toString().replace(/.+token=/, '');
+window.opener.postMessage({token: token}, window.location);
 window.close();
 		</script>
 	</body>
