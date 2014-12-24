@@ -66,11 +66,38 @@ $color-no: $color-alizarin;
       .Swipe-card-details {
         float: left;
         width: 100%;
-        margin-top: 20px;
-
-        ul {
-          margin: 0 0 0 20px;
-          padding: 0;
+        padding-top: 40px;
+        text-align: center;
+        color: $color-grey-dark;
+        font-size: 14px;
+        strong {
+          font-weight: 400;
+        }
+      }
+      .Swipe-card-details-splitter {
+        display: inline-block;
+        color: $color-grey-lighter;
+        margin: 0 5px;
+      }
+      .Swipe-card-details-stats {
+        list-style: none;
+        margin: 20px -20px 0;
+        padding: 0;
+        text-align: justified;
+        &:after {
+          content: "";
+          display: inline-block;
+          height: 1px;
+          width: 100%;
+        }
+        li {
+          display: inline-block;
+          width: 30%;
+        }
+        strong {
+          font-size: 1.5em;
+          font-weight: 600;
+          display: block;
         }
       }
     }

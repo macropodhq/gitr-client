@@ -203,22 +203,25 @@ var Swipe = module.exports = React.createClass({
             <strong>{info.company}</strong>
           }
 
-
-          {(info.location && info.location !== '') &&
-            Lives in <strong>{info.location}</strong>
+          {(info.location && info.location !== '' && info.company && info.company !== '') &&
+            <span className="Swipe-card-details-splitter">|</span>
           }
 
-          <ul>
+          {(info.location && info.location !== '') &&
+            <strong>{info.location}</strong>
+          }
+
+          <ul className="Swipe-card-details-stats">
             {(info.publicRepos && info.publicRepos > 0) &&
-              <li>Manages <strong>{info.publicRepos}</strong> public repositories</li>
+              <li><strong>{info.publicRepos}</strong> repos</li>
             }
 
             {(info.followers && info.followers > 0) &&
-              <li>Has <strong>{info.followers}</strong> followers</li>
+              <li><strong>{info.followers}</strong> followers</li>
             }
 
             {(info.following && info.following > 0) &&
-              <li>Is following <strong>{info.following}</strong> others</li>
+              <li><strong>{info.following}</strong> following</li>
             }
           </ul>
       </div>
