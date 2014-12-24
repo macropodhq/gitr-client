@@ -13,7 +13,7 @@ $color-no: $color-alizarin;
 
   .Swipe-cards {
     margin: 0;
-    padding: $app-base-padding $app-base-padding ($app-base-padding * 2);
+    padding: $app-base-padding;
     position: relative;
     height: 100%;
     overflow: hidden;
@@ -36,7 +36,7 @@ $color-no: $color-alizarin;
       .Swipe-card-head {
         background: $color-grey-lightest;
         text-align: center;
-        margin: -25px -25px 0;
+        margin: (-1 * $app-base-padding) (-1 * $app-base-padding) 0;
         border-radius: 2px 2px 0 0;
       }
 
@@ -160,6 +160,9 @@ $color-no: $color-alizarin;
   }
 
   .Swipe-controls {
+    position: absolute;
+    width: 100%;
+    bottom: ($app-base-padding * 2);
     text-align: center;
     margin-top: -65px;
     clear: both;
