@@ -103,10 +103,10 @@ var Conversation = module.exports = React.createClass({
 
                 return (
                   <li className={'Conversation-message Conversation-message--' + from}>
-                    <img src={(from === "me" ? self.state.me : self.state.match).avatar_url} />
+                    <img src={(from === "me" ? self.state.me : self.state.match).avatarUrl} />
                     <span className="Conversation-message-copy">
                       <p>{message.text}</p>
-                      <span className="Conversation-message-time">{moment(message.created_at).format('ddd h:mma')}</span>
+                      <span className="Conversation-message-time">{moment(message.createdAt).format('ddd h:mma')}</span>
                     </span>
                   </li>
                 );

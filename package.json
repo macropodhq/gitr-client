@@ -11,13 +11,14 @@
     "lodash-node": "^2.4.1",
     "moment": "^2.8.4",
     "react": "^0.12.1",
+    "react-marked": "^0.3.1",
     "react-router": "^0.11.4",
     "react-spinner": "~0.2.1",
     "react-swipe": "git://github.com/macropodhq/react-swipe",
     "superagent": "^0.21.0",
     "superagent-defaults": "macropodhq/superagent-defaults",
-    "uuid": "^2.0.1",
-    "react-marked": "^0.3.1"
+    "transform-keys": "0.0.3",
+    "uuid": "^2.0.1"
   },
   "devDependencies": {
     "autoprefixer-loader": "^1.0.0",

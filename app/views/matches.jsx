@@ -53,7 +53,7 @@ var Matches = module.exports = React.createClass({
                 <li>
                   <Router.Link to="conversation" params={{id: match.id || "what how"}}>
                     <Icon type="nav-right" font={false} />
-                    <img src={match.avatar_url} />
+                    <img src={match.avatarUrl} />
                     <h2>{'@' + match.login}</h2>
                   </Router.Link>
                 </li>
