@@ -54,7 +54,7 @@ var Wrapper = module.exports = React.createClass({
     var classes = cx({
       'App-nav-item': true,
       'App-nav-item--right': true,
-      'App-nav-item--notification': newNotifications && this.props.rightLink.to === 'matches'
+      'App-nav-item--notification': newNotifications && (this.props.rightLink && this.props.rightLink.to) === 'matches'
     });
 
     return (
