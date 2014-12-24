@@ -96,7 +96,7 @@ var Conversation = module.exports = React.createClass({
     var self = this;
 
     return (
-      <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={'@' + this.state.match.login}>
+      <Wrapper leftLink={{to: 'matches', iconType: 'nav-left'}} heading={<Router.Link to="person" params={{id: this.state.match.id}}>{'@' + this.state.match.login}</Router.Link>}>
         <div className="ConversationScroller" ref="messageContainer">
           <div className="Conversation">
             <ul className="Conversation-messages">
