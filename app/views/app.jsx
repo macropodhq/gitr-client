@@ -35,7 +35,9 @@ var App = module.exports = React.createClass({
         <Landing />
       );
     }
-
+    ga('send', 'pageview', {
+       'page': location.pathname + location.search  + location.hash
+      });
     return (
       <Router.RouteHandler {...this.props} />
     );
