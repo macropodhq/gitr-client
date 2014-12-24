@@ -118,7 +118,7 @@ var Conversation = module.exports = React.createClass({
         <form onSubmit={this.handleSubmit}>
           <div className="Conversation-add">
             <input type="text" className="Conversation-input" placeholder="Send a message" tabIndex="-1" value={this.state.message} onChange={this.handleChange} />
-            <Icon className="Conversation-add-submit" type="nav-right" font={false}/>
+            <button type="submit" className="Conversation-add-submit"><Icon type="nav-right" font={false}/></button>
           </div>
         </form>
       </Wrapper>

@@ -49,6 +49,14 @@ var Wrapper = module.exports = React.createClass({
   },
 
   render() {
+    var newNotifications = true;
+    var cx = React.addons.classSet;
+    var classes = cx({
+      'App-nav-item': true,
+      'App-nav-item--right': true,
+      'App-nav-item--notification': newNotifications && (this.props.rightLink && this.props.rightLink.to) === 'matches'
+    });
+
     return (
       <div className="App">
         <header>
@@ -57,7 +65,7 @@ var Wrapper = module.exports = React.createClass({
               {this.getLeftButton()}
             </div>
             <h1>{this.props.heading || 'gitr'}</h1>
-            <div className="App-nav-item App-nav-item--message">
+            <div className={classes}>
               {this.getRightButton()}
               { this.props.showYesNo &&
                   <div>

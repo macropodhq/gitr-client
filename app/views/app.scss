@@ -113,9 +113,25 @@ header {
       min-height: 1px;
     }
 
-    .App-nav-item--message {
+    .App-nav-item--right {
       a {
         float: right;
+      }
+    }
+
+    .App-nav-item--notification .Icon {
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        right: -4px;
+        top: -4px;
+        background: $color-alizarin;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        border: 2px solid $color-white;
       }
     }
   }
