@@ -92,6 +92,8 @@ $input-height: 40px;
   box-shadow: 0 -1px 0 rgba(#000, .1);
 
   .Conversation-add-submit {
+    border: 0;
+    cursor: pointer;
     position: absolute;
     right: 10px;
     top: 5px;
@@ -101,6 +103,10 @@ $input-height: 40px;
     border-radius: 4px;
     text-align: center;
     padding-top: 6px;
+
+    svg {
+      height: 19px
+    }
 
     path {
       fill: $color-white;
