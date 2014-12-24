@@ -42,7 +42,7 @@ var Landing = module.exports = React.createClass({
         <div className="Masthead">
           <div className="Masthead-content">
             <div className="Masthead-copy">
-              <h1 className="Masthead-title">gitr</h1>
+              <h1 className="Masthead-title">gitr.io - It's how developers meet</h1>
               <h2 className="Masthead-slogan">It’s how developers meet.</h2>
               <Router.Link to="swipe">
                 <Button disabled={this.state.loading} onClick={this.handleLoginClick} className="Masthead-callToAction">Log In with GitHub</Button>
@@ -54,7 +54,7 @@ var Landing = module.exports = React.createClass({
         </div>
         <div className="Footer">
           <img src={imageMacropodLogo} className="Footer-logo" />
-          <a href="http://macropod.com" target="_blank">Macropod Software</a>
+          <a href="http://macropod.com" target="_blank">Macropod</a>
           <span className="Footer-subtitle">Gitr was built during a 2 day Macropod hackathon. <a href="https://medium.com/@Macropod/conceiving-building-and-launching-an-app-in-just-2-days-25679a9c4eb2" target="_blank">Read more</a></span>
 
         </div>
