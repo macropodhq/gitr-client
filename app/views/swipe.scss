@@ -9,14 +9,14 @@ $color-no: $color-alizarin;
 
 .Swipe {
   height: 100%;
-  padding: $app-base-padding;
   background-size: 100%;
 
   .Swipe-cards {
-    max-width: 300px;
-    margin: 0 auto;
+    margin: 0;
+    padding: $app-base-padding $app-base-padding ($app-base-padding * 2);
     position: relative;
-    height: 300px;
+    height: 100%;
+    overflow: hidden;
     @extend %clearfix;
 
     .Swipe-card, .Swipe-card-next, .Swipe-card-more {
@@ -27,8 +27,11 @@ $color-no: $color-alizarin;
 
     .Swipe-card, .Swipe-card-next, .Swipe-card-more {
       padding: $app-base-padding;
-      position: relative;
-      height: 100%;
+      position: absolute;
+      top: $app-base-padding;
+      left: $app-base-padding;
+      right: $app-base-padding;
+      height: calc(100% - 110px);
 
       .Swipe-card-head {
         background: $color-grey-lightest;
@@ -66,7 +69,7 @@ $color-no: $color-alizarin;
       .Swipe-card-details {
         float: left;
         width: 100%;
-        padding-top: 40px;
+        padding-top: 30px;
         text-align: center;
         color: $color-grey-dark;
         font-size: 14px;
@@ -105,6 +108,7 @@ $color-no: $color-alizarin;
     .Swipe-card {
       z-index: 3;
       @extend %clearfix;
+      overflow: hidden;
 
       .Swipe-status {
         svg {
@@ -138,26 +142,26 @@ $color-no: $color-alizarin;
 
     .Swipe-card-next {
       z-index: 2;
-      width: 98%;
       position: absolute;
-      top: 5px;
-      left: 1%;
+      top: $app-base-padding + 2px;
+      left: $app-base-padding + 2px;
+      right: $app-base-padding + 2px;
       background-color: mix($color-white, $color-grey-light, 80);
     }
 
     .Swipe-card-more {
       z-index: 1;
-      width: 96%;
       position: absolute;
-      top: 10px;
-      left: 2%;
+      top: $app-base-padding + 4px;
+      left: $app-base-padding + 4px;
+      right: $app-base-padding + 4px;
       background-color: mix($color-white, $color-grey-light, 60);
     }
   }
 
   .Swipe-controls {
     text-align: center;
-    margin-top: 50px;
+    margin-top: -65px;
     clear: both;
 
     svg {
