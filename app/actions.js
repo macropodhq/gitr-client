@@ -6,6 +6,13 @@ var defaults = require('superagent-defaults');
 var uuid = require('uuid');
 var Houkou = require('houkou');
 var DecodeJWT = require('jwt-decode');
+var transform = require('transform-keys');
+
+var camelify = transform(function (key) {
+  return key.replace(/_([a-z])/ig, function (_, $1) {
+    return $1.toUpperCase();
+  });
+});
 
 var log = require('bows')('Actions');
 
@@ -32,7 +39,7 @@ var makeFetchMultiple = function(ctx, pendingEvent, completeEvent, key, urlTempl
 
       return self.dispatch(completeEvent, {
         operationId: operationId,
-        models: res.body[key],
+        models: res.body[key].map(camelify),
       });
     });
   };
@@ -60,7 +67,7 @@ var makeFetchOne = function(ctx, pendingEvent, completeEvent, urlTemplate) {
 
       return self.dispatch(completeEvent, {
         operationId: operationId,
-        model: res.body,
+        model: camelify(res.body),
       });
     });
   };
@@ -91,7 +98,7 @@ var makeCreate = function(ctx, pendingEvent, completeEvent, urlTemplate) {
 
       return self.dispatch(completeEvent, {
         operationId: operationId,
-        model: res.body,
+        model: camelify(res.body),
       });
     });
   };
@@ -123,7 +130,7 @@ var makeUpdate = function(ctx, pendingEvent, completeEvent, urlTemplate) {
 
       return self.dispatch(completeEvent, {
         operationId: operationId,
-        model: res.body,
+        model: camelify(res.body),
       });
     });
   };
@@ -183,13 +190,7 @@ module.exports = function createActions(baseUrl, pubnubKey) {
           message(incoming, env, channel) {
             if (incoming.type === "message") {
               actions.dispatch(constants.MESSAGE_CREATE_REMOTE, {
-                model: {
-                  id: incoming.id,
-                  created_at: incoming.created_at,
-                  matchId: incoming.from,
-                  from: incoming.from,
-                  text: incoming.text,
-                },
+                model: camelify(incoming),
               });
             }
 
@@ -200,7 +201,7 @@ module.exports = function createActions(baseUrl, pubnubKey) {
                 }
 
                 return actions.dispatch(constants.MATCH_CREATE_REMOTE, {
-                  model: res.body.person,
+                  model: camelify(res.body.person),
                 });
               });
             }
@@ -272,7 +273,7 @@ module.exports = function createActions(baseUrl, pubnubKey) {
             });
           }
 
-          var profile = res.body.person;
+          var profile = camelify(res.body.person);
 
           ctx.connectPubnub(profile.channel, self);
 

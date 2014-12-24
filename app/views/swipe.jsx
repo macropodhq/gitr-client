@@ -208,8 +208,8 @@ var Swipe = module.exports = React.createClass({
             <li>Lives in <strong>{info.location}</strong></li>
           }
 
-          {(info.public_repos && info.public_repos > 0) &&
-            <li>Manages <strong>{info.public_repos}</strong> public repositories</li>
+          {(info.publicRepos && info.publicRepos > 0) &&
+            <li>Manages <strong>{info.publicRepos}</strong> public repositories</li>
           }
 
           {(info.followers && info.followers > 0) &&
@@ -273,7 +273,7 @@ var Swipe = module.exports = React.createClass({
           <div className="Swipe">
             <div className="Swipe-cards">
               <div className="Swipe-card" style={style} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>
-                <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.first.avatar_url + ')'}}></div>
+                <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.first.avatarUrl + ')'}}></div>
                 <div className="Swipe-card-name">
                   <h3>{this.state.first.name}</h3>
                   <h4>{'@' + this.state.first.login}</h4>
@@ -287,7 +287,7 @@ var Swipe = module.exports = React.createClass({
 
               { (this.state.more.length > 0) &&
                 <div className="Swipe-card-next">
-                  <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.more[0].avatar_url + ')'}}></div>
+                  <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.more[0].avatarUrl + ')'}}></div>
                   <div className="Swipe-card-name">
                     <h3>{this.state.more[0].name}</h3>
                     <h4>{'@' + this.state.more[0].login}</h4>
