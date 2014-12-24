@@ -194,6 +194,21 @@ var Swipe = module.exports = React.createClass({
   },
 
   details(info) {
+
+    var repos = false;
+    var followers = false;
+    var following = false;
+
+    if (info.publicRepos) {
+      repos = true;
+    }
+    if (info.followers) {
+      followers = true;
+    }
+    if (info.following) {
+      following = true;
+    }
+
     return (
       <div className="Swipe-card-details">
         {(info.bio && info.bio !== '') &&
@@ -212,17 +227,13 @@ var Swipe = module.exports = React.createClass({
           }
 
           <ul className="Swipe-card-details-stats">
-            {(info.publicRepos && info.publicRepos > 0) &&
-              <li><strong>{info.publicRepos}</strong> repos</li>
-            }
+          
+            <li><strong>{repos ? info.publicRepos : 0}</strong> repos</li>
 
-            {(info.followers && info.followers > 0) &&
-              <li><strong>{info.followers}</strong> followers</li>
-            }
+            <li><strong>{followers ? info.followers : 0}</strong> followers</li>
 
-            {(info.following && info.following > 0) &&
-              <li><strong>{info.following}</strong> following</li>
-            }
+            <li><strong>{following ? info.following : 0}</strong> following</li>
+            
           </ul>
       </div>
     )
