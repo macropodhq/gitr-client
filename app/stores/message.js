@@ -35,16 +35,33 @@ var MessageStore = module.exports = Fluxxor.createStore({
 
     return Common.handleLoadComplete.call(this, {
       models: payload.model.messages.map(function(message) {
-        return _.extend({}, message, {matchId: payload.model.person.id});
+        return _.extend({}, message, {otherUserId: payload.model.person.id});
       }),
     });
   },
   handleCreatePending: Common.handleCreatePending,
-  handleCreateComplete: Common.handleCreateComplete,
-  handleCreateRemote: Common.handleCreateRemote,
+  handleCreateComplete(payload) {
+    if (payload.error) {
+      return Common.handleCreateComplete.call(this, payload);
+    }
+
+    return Common.handleCreateComplete.call(this, payload);
+  },
+  handleCreateRemote(payload) {
+    var model = _.findWhere(this.models, {id: payload.model.id});
+
+    if (!model) {
+      this.models.push(model = {});
+    }
+
+    _.extend(model, payload.model);
+
+    this.emit('change');
+  },
   get: Common.get,
   getBy: Common.getBy,
   getAll: Common.getAll,
   getState: Common.getState,
   getByMatchId: Common.makeGetBy("matchId"),
+  getByOtherUserId: Common.makeGetBy("otherUserId"),
 });

@@ -21,6 +21,7 @@ flux.on('dispatch', function(name, payload) {
 });
 
 flux.actions.init();
+flux.actions.matchesFetch();
 
 Router.run(routes, (Handler, state) => {
   log('route change', state);

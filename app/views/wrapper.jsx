@@ -1,6 +1,9 @@
 /** @jsx React.DOM */
 
 var React = require('react');
+var Fluxxor = require('fluxxor');
+var FluxMixin = Fluxxor.FluxMixin(React);
+var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var Router = require('react-router');
 var Icon = require('../base/components/icon');
 
@@ -10,6 +13,19 @@ require('./app.scss');
 
 var Wrapper = module.exports = React.createClass({
   displayName: 'Wrapper',
+
+  mixins: [
+    FluxMixin,
+    StoreWatchMixin('MatchStore'),
+  ],
+
+  getStateFromFlux() {
+    var MatchStore = this.getFlux().store('MatchStore');
+
+    return {
+      hasUnseen: MatchStore.hasUnseen,
+    };
+  },
 
   getDefaultProps() {
     return {
@@ -49,12 +65,11 @@ var Wrapper = module.exports = React.createClass({
   },
 
   render() {
-    var newNotifications = true;
     var cx = React.addons.classSet;
     var classes = cx({
       'App-nav-item': true,
       'App-nav-item--right': true,
-      'App-nav-item--notification': newNotifications && (this.props.rightLink && this.props.rightLink.to) === 'matches'
+      'App-nav-item--notification': (this.props.rightLink && this.props.rightLink.to === 'matches') && this.state.hasUnseen,
     });
 
     return (

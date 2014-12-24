@@ -28,10 +28,12 @@ var Conversation = module.exports = React.createClass({
     var MessageStore = this.getFlux().store('MessageStore');
     var LoginStore = this.getFlux().store('LoginStore');
 
+    MatchStore.markSeen(this.getParams().id);
+
     return {
       me: LoginStore.getProfile(),
       match: MatchStore.get(this.getParams().id),
-      messages: MessageStore.getByMatchId(this.getParams().id),
+      messages: MessageStore.getByOtherUserId(this.getParams().id),
     };
   },
 

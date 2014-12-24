@@ -48,13 +48,13 @@ var Matches = module.exports = React.createClass({
       <Wrapper leftLink={{to: 'swipe', iconType: 'nav-left'}} heading="Matches">
         <div className="Matches">
           <ul className="Matches-users">
-            {this.state.matches.map(function(match) {
+            {this.state.matches.reverse().map(function(match) {
               return (
                 <li>
                   <Router.Link to="conversation" params={{id: match.id || "what how"}}>
                     <Icon type="nav-right" font={false} />
                     <img src={match.avatarUrl} />
-                    <h2>{'@' + match.login}</h2>
+                    <h2>{'@' + match.login + (match.isUnseen ? ' (new!)' : '')}</h2>
                   </Router.Link>
                 </li>
               );

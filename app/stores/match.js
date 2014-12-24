@@ -13,6 +13,7 @@ var MatchStore = module.exports = Fluxxor.createStore({
     this.models = [];
 
     this.isLoading = false;
+    this.hasUnseen = false;
     this.error = null;
     this.createCompleteWaiting = [];
     this.deleteCompleteWaiting = [];
@@ -28,7 +29,8 @@ var MatchStore = module.exports = Fluxxor.createStore({
       constants.MATCH_UPDATE_REMOTE, this.handleUpdateRemote,
       constants.MATCH_DELETE_PENDING, this.handleDeletePending,
       constants.MATCH_DELETE_COMPLETE, this.handleDeleteComplete,
-      constants.MATCH_DELETE_REMOTE, this.handleDeleteRemote
+      constants.MATCH_DELETE_REMOTE, this.handleDeleteRemote,
+      constants.MESSAGE_CREATE_REMOTE, this.handleMessageCreateRemote
     );
 
     log('INIT', this);
@@ -76,7 +78,11 @@ var MatchStore = module.exports = Fluxxor.createStore({
     if (payload.model && payload.model.status === "Matched with other user") {
       alert('You and ' + waiting.model.login + ' are a match!');
 
+      this.hasUnseen = true;
+      waiting.model.isUnseen = true;
+
       this.models.push(waiting.model);
+
       this.emit('change');
     }
   },
@@ -86,10 +92,55 @@ var MatchStore = module.exports = Fluxxor.createStore({
 
     if (!model) {
       this.models.push(model = {});
+
+      this.hasUnseen = true;
+      model.isUnseen = true;
     }
 
     _.extend(model, payload.model);
 
     this.emit('change');
+  },
+
+  handleMessageCreateRemote(payload) {
+    console.log(payload);
+
+    var model = _.findWhere(this.models, {id: payload.model.otherUserId});
+
+    console.log(model);
+
+    if (!model) {
+      return;
+    }
+
+    model.isUnseen = true;
+
+    this.calculateUnseen();
+  },
+
+  markSeen(id) {
+    var model = this.get(id);
+
+    if (!model) {
+      return;
+    }
+
+    delete model.isUnseen;
+
+    this.calculateUnseen();
+  },
+
+  calculateUnseen() {
+    var hasUnseen = false;
+    this.models.forEach(function(model) {
+      hasUnseen = hasUnseen || model.isUnseen;
+    });
+
+    console.log("unseen", this.hasUnseen, "->", hasUnseen);
+
+    if (this.hasUnseen !== hasUnseen) {
+      this.hasUnseen = hasUnseen;
+      this.emit('change');
+    }
   },
 });
