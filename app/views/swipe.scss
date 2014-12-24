@@ -16,7 +16,6 @@ $color-no: $color-alizarin;
     max-width: 300px;
     margin: 0 auto;
     position: relative;
-    //height: calc((100% - #{$app-header-height}) - 70px);
     height: 300px;
     @extend %clearfix;
 
@@ -31,33 +30,37 @@ $color-no: $color-alizarin;
       position: relative;
       height: 100%;
 
+      .Swipe-card-head {
+        background: $color-grey-lightest;
+        text-align: center;
+        margin: -25px -25px 0;
+        border-radius: 2px 2px 0 0;
+      }
+
       h3 {
-        font-size: 22px;
+        font-size: 21px;
         margin: 0;
-        font-weight: normal;
+        font-weight: 600;
+        color: $color-grey-dark;
       }
 
       h4 {
         font-size: 14px;
-        margin: 0 auto;
+        margin: 0;
         font-weight: normal;
-        float: left;
+        color: $color-grey-lighter;
       }
 
       .Swipe-card-name {
-        padding: 8px 0px;
-        float: right;
-        width: calc(100% - 80px);
-        @extend %clearfix;
+        padding: 10px 0;
       }
 
       .Swipe-card-image {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
+        margin: 10px auto -35px;
         background-size: cover;
         border-radius: 50%;
-        float: left;
-        //height: calc(100% - 46px);
       }
 
       .Swipe-card-details {

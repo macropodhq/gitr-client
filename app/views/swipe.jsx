@@ -199,27 +199,28 @@ var Swipe = module.exports = React.createClass({
         {(info.bio && info.bio !== '') &&
           <p>{info.bio}</p>
         }
-        <ul>
           {(info.company && info.company !== '') &&
-            <li>Works for <strong>{info.company}</strong></li>
+            <strong>{info.company}</strong>
           }
+
 
           {(info.location && info.location !== '') &&
-            <li>Lives in <strong>{info.location}</strong></li>
+            Lives in <strong>{info.location}</strong>
           }
 
-          {(info.publicRepos && info.publicRepos > 0) &&
-            <li>Manages <strong>{info.publicRepos}</strong> public repositories</li>
-          }
+          <ul>
+            {(info.publicRepos && info.publicRepos > 0) &&
+              <li>Manages <strong>{info.publicRepos}</strong> public repositories</li>
+            }
 
-          {(info.followers && info.followers > 0) &&
-            <li>Has <strong>{info.followers}</strong> followers</li>
-          }
+            {(info.followers && info.followers > 0) &&
+              <li>Has <strong>{info.followers}</strong> followers</li>
+            }
 
-          {(info.following && info.following > 0) &&
-            <li>Is following <strong>{info.following}</strong> others</li>
-          }
-        </ul>
+            {(info.following && info.following > 0) &&
+              <li>Is following <strong>{info.following}</strong> others</li>
+            }
+          </ul>
       </div>
     )
 
@@ -273,10 +274,12 @@ var Swipe = module.exports = React.createClass({
           <div className="Swipe">
             <div className="Swipe-cards">
               <div className="Swipe-card" style={style} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove}>
-                <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.first.avatarUrl + ')'}}></div>
-                <div className="Swipe-card-name">
-                  <h3>{this.state.first.name}</h3>
-                  <h4>{'@' + this.state.first.login}</h4>
+                <div className="Swipe-card-head">                  
+                  <div className="Swipe-card-name">
+                    <h3>{this.state.first.name}</h3>
+                    <h4>{'@' + this.state.first.login}</h4>
+                    <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.first.avatarUrl + ')'}}></div>
+                  </div>
                 </div>
                 {this.details(this.state.first)}
                 <div className={statusClass} style={statusStyle}>
