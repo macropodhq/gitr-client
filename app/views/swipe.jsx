@@ -227,7 +227,7 @@ var Swipe = module.exports = React.createClass({
           }
 
           <ul className="Swipe-card-details-stats">
-          
+
             <li><strong>{repos ? info.publicRepos : 0}</strong> repos</li>
 
             <li><strong>{followers ? info.followers : 0}</strong> followers</li>
@@ -304,10 +304,12 @@ var Swipe = module.exports = React.createClass({
 
               { (this.state.more.length > 0) &&
                 <div className="Swipe-card-next">
-                  <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.more[0].avatarUrl + ')'}}></div>
-                  <div className="Swipe-card-name">
-                    <h3>{this.state.more[0].name}</h3>
-                    <h4>{'@' + this.state.more[0].login}</h4>
+                  <div className="Swipe-card-head"> 
+                    <div className="Swipe-card-name">
+                      <h3>{this.state.more[0].name}</h3>
+                      <h4>{'@' + this.state.more[0].login}</h4>
+                      <div className="Swipe-card-image" style={{'background-image': 'url(' + this.state.more[0].avatarUrl + ')'}}></div>
+                    </div>
                   </div>
                   {this.details(this.state.more[0])}
                 </div>
