@@ -4,4 +4,9 @@ set -e
 
 mkdir -p dist
 docker run --rm -i -t -v $PWD:/build -w /build node /bin/sh -c "npm install && npm run build"
-docker build -t macropod/gitr-client .
+docker build -t macropod/gitr-client:$SHA1 .
+
+if [ ! -z "$PUBLISH" -a "$BUILDKITE_BRANCH" == "master" ]; then
+  echo "--- Publishing container"
+  docker push macropod/gitr-client:$SHA1
+fi
