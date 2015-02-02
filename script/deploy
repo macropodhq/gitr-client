@@ -11,7 +11,7 @@ zip -r $DEPLOY_FILE Dockerrun.aws.json
 
 aws s3 cp $DEPLOY_FILE s3://macropod-deploy/gitr-client/$DEPLOY_FILE
 
-aws elasticbeanstalk create-application-version --application-name Gitr-client --version-label $SHA1 --source-bundle S3Bucket=macropod-deploy,S3Key=pouch/$DEPLOY_FILE  || /bin/true #don't fail if rebuilding
+aws elasticbeanstalk create-application-version --application-name Gitr-client --version-label $SHA1 --source-bundle S3Bucket=macropod-deploy,S3Key=gitr-client/$DEPLOY_FILE  || /bin/true #don't fail if rebuilding
 
 # # Update Elastic Beanstalk environment to new version
-aws elasticbeanstalk update-environment --environment-name gitr-client --version-label ${SHA1}
+aws elasticbeanstalk update-environment --environment-name $APP_ENV --version-label ${SHA1}
