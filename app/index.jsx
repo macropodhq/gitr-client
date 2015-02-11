@@ -23,8 +23,10 @@ flux.on('dispatch', function(name, payload) {
 flux.actions.init();
 flux.actions.matchesFetch();
 
-Router.run(routes, (Handler, state) => {
-  log('route change', state);
+document.addEventListener('deviceready', function() {
+  Router.run(routes, (Handler, state) => {
+    log('route change', state);
 
-  React.render(<Handler flux={flux} />, document.body);
+    React.render(<Handler flux={flux} />, document.body);
+  });
 });

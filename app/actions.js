@@ -248,8 +248,20 @@ module.exports = function createActions(baseUrl, pubnubKey) {
         operationId: operationId,
       });
 
-      var self = this;
+      var iframe = document.createElement("iframe");
+      _.extend(iframe.style, {
+        position: "absolute",
+        top: "7%",
+        left: "7%",
+        width: "86%",
+        height: "86%",
+        padding: "0px",
+        margin: "0px",
+        border: "none",
+        background: "#ffffff",
+      });
 
+      var self = this;
       var onMessage = function onMessage(ev) {
         if (ev.origin !== window.location.origin) {
           return;
@@ -260,6 +272,8 @@ module.exports = function createActions(baseUrl, pubnubKey) {
         }
 
         window.removeEventListener('message', onMessage);
+
+        document.body.removeChild(iframe);
 
         var token = ev.data.token;
 
@@ -286,7 +300,8 @@ module.exports = function createActions(baseUrl, pubnubKey) {
       };
       window.addEventListener('message', onMessage);
 
-      window.open(baseUrl + '/auth?redirect_uri=' + escape(window.location.origin + '/login-callback.html'));
+      document.body.appendChild(iframe);
+      iframe.src = baseUrl + '/auth?redirect_uri=' + escape('http://127.0.0.1:3000/login-callback.html');
     },
   };
 };

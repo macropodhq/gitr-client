@@ -6,7 +6,7 @@
 	<body>
 		<script>
 var token = window.location.toString().replace(/.+token=/, '');
-window.opener.postMessage({token: token}, window.location);
+window.parent.postMessage({token: token}, window.location);
 window.close();
 		</script>
 	</body>
